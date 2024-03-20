@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- primary color -->
+    <color name="primary">#F23B0D</color>
+
+    <!-- primary color -->
+    <color name="secondary">#FCFAF7</color>
+
+    <!-- State colors -->
+    <color name="white">#FFFFFFFF</color>
+</resources>
