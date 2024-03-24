@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.neztech.serah.MainActivity;
 import com.neztech.serah.R;
-import com.neztech.serah.animation.SplashScreenAnimation;
 
 public class SplashScreenActivity extends AppCompatActivity {
     ImageView splashImage;
@@ -26,9 +25,6 @@ public class SplashScreenActivity extends AppCompatActivity {
                 Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
-
-                SplashScreenAnimation animation = new SplashScreenAnimation(splashImage);
-                animation.startAnimation();
             }
         }, 1000);
     }
