@@ -7,7 +7,6 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.neztech.serah.MainActivity;
 import com.neztech.serah.R;
 
 public class SplashScreenActivity extends AppCompatActivity {

@@ -1,10 +1,11 @@
-package com.neztech.serah;
+package com.neztech.serah.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.neztech.serah.R;
 import com.neztech.serah.activity.MainMenuActivity;
 
 public class MainActivity extends AppCompatActivity {
