@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.neztech.serah.R;
-import com.neztech.serah.activity.MainMenuActivity;
+import com.neztech.serah.authentication.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,11 +15,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        startOtherActivity();
+        startLoginActivity();
     }
 
-    public void startOtherActivity() {
-        Intent intent = new Intent(this, MainMenuActivity.class);
+    public void startLoginActivity() {
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 }

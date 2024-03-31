@@ -6,13 +6,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.MainMenuActivity">
-    
-    <com.google.android.material.textview.MaterialTextView
+
+    <LinearLayout
+        android:id="@+id/ll_done"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome to main menu ^^"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:textSize="20sp"/>
-
+        android:orientation="vertical"
+        android:background="@drawable/bg_rect"
+        android:paddingStart="60dp"
+        android:paddingEnd="60dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Done"
+            android:textColor="@android:color/white"/>
+    </LinearLayout>
 </RelativeLayout>

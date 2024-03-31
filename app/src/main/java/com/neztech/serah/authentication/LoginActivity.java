@@ -2,20 +2,34 @@ package com.neztech.serah.authentication;
 
 import android.os.Bundle;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.card.MaterialCardView;
 import com.neztech.serah.R;
+import com.neztech.serah.animation.CustomAnimation;
 
 public class LoginActivity extends AppCompatActivity {
+    MaterialCardView googleCardView;
+    MaterialCardView facebookCardView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_login);
+
+        //  Initiate Animation on Google and Facebook Material CardViews
+        googleCardView = findViewById(R.id.card_view_google);
+        facebookCardView = findViewById(R.id.card_view_facebook);
+
+        CustomAnimation googleAnimation = new CustomAnimation(googleCardView);
+        googleAnimation.cardViewClickAnimation(LoginActivity.this, googleCardView);
+
+        CustomAnimation facebookAnimation = new CustomAnimation(googleCardView);
+        facebookAnimation.cardViewClickAnimation(LoginActivity.this, facebookCardView);
+
+        //  Implement Business Logic on Buttons
+
+
+
     }
 }
