@@ -21,11 +21,8 @@ public class LoginActivity extends AppCompatActivity {
         googleCardView = findViewById(R.id.card_view_google);
         facebookCardView = findViewById(R.id.card_view_facebook);
 
-        CustomAnimation googleAnimation = new CustomAnimation(googleCardView);
-        googleAnimation.cardViewClickAnimation(LoginActivity.this, googleCardView);
-
-        CustomAnimation facebookAnimation = new CustomAnimation(googleCardView);
-        facebookAnimation.cardViewClickAnimation(LoginActivity.this, facebookCardView);
+        CustomAnimation.cardViewClickAnimation(LoginActivity.this, googleCardView);
+        CustomAnimation.cardViewClickAnimation(LoginActivity.this, facebookCardView);
 
         //  Implement Business Logic on Buttons
 
