@@ -1,6 +1,7 @@
 package com.neztech.serah.authentication;
 
 import android.os.Bundle;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +12,7 @@ import com.neztech.serah.animation.CustomAnimation;
 public class LoginActivity extends AppCompatActivity {
     MaterialCardView googleCardView;
     MaterialCardView facebookCardView;
+    ImageView backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +25,11 @@ public class LoginActivity extends AppCompatActivity {
 
         CustomAnimation.cardViewClickAnimation(LoginActivity.this, googleCardView);
         CustomAnimation.cardViewClickAnimation(LoginActivity.this, facebookCardView);
+
+        //  Back Button Animation
+        backButton = findViewById(R.id.image_view_back_navigation);
+
+        CustomAnimation.imageViewClickAnimation(LoginActivity.this, backButton);
 
         //  Implement Business Logic on Buttons
 

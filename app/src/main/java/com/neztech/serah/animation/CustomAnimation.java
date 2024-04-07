@@ -3,6 +3,7 @@ package com.neztech.serah.animation;
 import android.content.Context;
 import android.view.View;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
 
 import com.google.android.material.button.MaterialButton;
@@ -37,6 +38,16 @@ public class CustomAnimation {
             public void onClick(View v) {
                 android.view.animation.Animation onclick_effect = AnimationUtils.loadAnimation(context, R.anim.onclick_effect);
                 materialButton.startAnimation(onclick_effect);
+            }
+        });
+    }
+
+    public static void imageViewClickAnimation(Context context, ImageView imageView){
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                android.view.animation.Animation onclick_effect = AnimationUtils.loadAnimation(context, R.anim.onclick_effect);
+                imageView.startAnimation(onclick_effect);
             }
         });
     }
