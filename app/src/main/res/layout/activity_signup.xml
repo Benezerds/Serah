@@ -7,5 +7,80 @@
     android:layout_height="match_parent"
     tools:context=".authentication.SignupActivity">
 
+    <ImageView
+        android:id="@+id/image_view_back_navigation"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/navigation"
+        app:layout_constraintBottom_toTopOf="@+id/image_view_signupimage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.07"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.73" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/image_view_signupimage"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/thank_you"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#B33333"
+        android:padding="30dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/image_view_signupimage" >
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/epilogue_bold"
+            android:text="Sign Up"
+            android:textSize="32dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/text_field_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#F3F2F2"
+            android:drawableStart="@drawable/mail_outline"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/epilogue_light"
+            android:hint="@string/email_phone"
+            android:minHeight="48dp"
+            android:textColorHint="#BDBDBD"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            tools:layout_editor_absoluteX="30dp" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/text_field_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#F3F2F2"
+            android:drawableStart="@drawable/mail_outline"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/epilogue_light"
+            android:hint="@string/email_phone"
+            android:minHeight="48dp"
+            android:textColorHint="#BDBDBD"
+            app:layout_constraintTop_toBottomOf="parent"
+            tools:layout_editor_absoluteX="30dp" />
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

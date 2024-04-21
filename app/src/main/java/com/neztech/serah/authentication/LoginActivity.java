@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
         CustomAnimation.cardViewClickAnimation(LoginActivity.this, facebookCardView);
 
         //  Back Button Animation
-        backButton = findViewById(R.id.image_view_back_navigation);
+        backButton = findViewById(R.id.image_view_backnavigation);
 
         CustomAnimation.imageViewClickAnimation(LoginActivity.this, backButton);
 

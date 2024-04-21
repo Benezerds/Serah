@@ -13,13 +13,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
         startLoginActivity();
     }
 
     public void startLoginActivity() {
         Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
+    public void startMainMenuActivity() {
+        Intent intent = new Intent(this, MainMenuActivity.class);
         startActivity(intent);
     }
 }
