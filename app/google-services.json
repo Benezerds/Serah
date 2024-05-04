@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "223935006988",
+    "project_id": "serah-a48e4",
+    "storage_bucket": "serah-a48e4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:223935006988:android:c0d47edbe549de8ba62129",
+        "android_client_info": {
+          "package_name": "com.neztech.serah"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAIfKjS_q4T4arhV3NC6s_arUxrA4b4xs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
