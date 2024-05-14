@@ -96,6 +96,18 @@ public class FirebasePersonalUtils {
     }
 
 
+    public static boolean checkCurrentUser(FirebaseAuth mAuth){
+        // Check if user is signed in (non-null) and update UI accordingly.
+        boolean result;
+
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            result = true;
+        } else {
+            result = false;
+        }
+        return result;
+    }
 }
 
 

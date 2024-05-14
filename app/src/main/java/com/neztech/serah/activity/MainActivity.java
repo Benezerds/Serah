@@ -5,10 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.neztech.serah.R;
 import com.neztech.serah.authentication.LoginActivity;
+import com.neztech.serah.utils.FirebasePersonalUtils;
 
 public class MainActivity extends AppCompatActivity {
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,23 +19,22 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
+
+        mAuth = FirebaseAuth.getInstance();
         // Check if the user is logged in
-//        if (isLoggedIn()) {
-//            // If the user is logged in, redirect them to the MainMenuActivity
-//
-//        } else {
-//            // If the user is not logged in, redirect them to the LoginActivity
-//            startLoginActivity();
-//        }
-//
-//        // Close this activity so it's removed from the activity stack
-//        finish();
+        boolean loggedIn = FirebasePersonalUtils.checkCurrentUser(mAuth);
+
+        if (loggedIn = true) {
+            startMainMenuActivity();
+        } else {
+            startLoginActivity();
+        }
     }
 
-//    public void startLoginActivity() {
-//        Intent intent = new Intent(this, LoginActivity.class);
-//        startActivity(intent);
-//    }
+    public void startLoginActivity() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
 
     public void startMainMenuActivity() {
         Intent intent = new Intent(this, MainMenuActivity.class);
