@@ -27,8 +27,8 @@ public class LoginActivity extends AppCompatActivity {
     MaterialCardView googleCardView;
     MaterialCardView facebookCardView;
     MaterialButton buttonLogin;
-    ImageView backButton;
     TextView signUpToggle;
+    TextView forgotPass;
 
     //  Firebase
     private FirebaseAuth mAuth;
@@ -49,6 +49,8 @@ public class LoginActivity extends AppCompatActivity {
 
         signUpToggle = findViewById(R.id.text_view_signup);
 
+        forgotPass = findViewById(R.id.text_view_forgotpass);
+
         CustomAnimation.cardViewClickAnimation(LoginActivity.this, googleCardView);
         CustomAnimation.cardViewClickAnimation(LoginActivity.this, facebookCardView);
 
@@ -60,6 +62,16 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        //  Forgot Password Page
+        forgotPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
                 startActivity(intent);
             }
         });

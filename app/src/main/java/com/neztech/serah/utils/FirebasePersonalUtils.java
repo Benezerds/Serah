@@ -96,6 +96,22 @@ public class FirebasePersonalUtils {
     }
 
 
+    //  RESET ACCOUNT WITH EMAIL
+    public static Task<Void> resetPassword(String email){
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+
+        return auth.sendPasswordResetEmail(email)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "Email sent.");
+                        }
+                    }
+                });
+    }
+
+
     public static boolean checkCurrentUser(FirebaseAuth mAuth){
         // Check if user is signed in (non-null) and update UI accordingly.
         boolean result;
