@@ -9,8 +9,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
@@ -56,26 +54,6 @@ public class LoginActivity extends AppCompatActivity {
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
-
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FirebasePersonalUtils mUtils = new FirebasePersonalUtils(LoginActivity.this);
-
-                mUtils.signInRequest(emailInput.getText().toString(), passInput.getText().toString()).addOnCompleteListener(new OnCompleteListener<Boolean>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Boolean> task) {
-                        if (task.isSuccessful()) {
-                            Intent intent = new Intent(LoginActivity.this, MainMenuActivity.class);
-                            startActivity(intent);
-                    } else {
-
-                        }
-                    }
-                });
-            }
-        });
-
 
         //  Sign Up on-click listener
         signUpToggle.setOnClickListener(new View.OnClickListener() {

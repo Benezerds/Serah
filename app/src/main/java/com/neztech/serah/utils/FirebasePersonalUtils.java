@@ -2,23 +2,26 @@ package com.neztech.serah.utils;
 
 import static android.content.ContentValues.TAG;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
 import android.app.Activity;
-import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.google.android.gms.auth.api.identity.BeginSignInRequest;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskCompletionSource;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.neztech.serah.activity.MainMenuActivity;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.GeoPoint;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class FirebasePersonalUtils {
     private FirebaseAuth mAuth;
@@ -29,7 +32,7 @@ public class FirebasePersonalUtils {
         this.activity = activity;
     }
 
-    public Task<Boolean> signInRequest(String email, String password){
+    public Task<Boolean> createAccountWithEmail(String email, String password, String fullName, String phoneNumber){
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
@@ -44,6 +47,35 @@ public class FirebasePersonalUtils {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+
+                            // Get an instance of Firestore
+                            FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+                            // Create a new user with a first and last name
+                            Map<String, Object> userMap = new HashMap<>();
+                            userMap.put("email", email);
+                            userMap.put("full_Name", fullName);
+                            userMap.put("phoneNumber", phoneNumber);
+                            userMap.put("created_time", Timestamp.now());
+                            userMap.put("location", "");
+                            userMap.put("username", fullName);
+
+
+                            // Add a new document with the user ID
+                            db.collection("User").document(user.getUid())
+                                    .set(userMap)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Log.d(TAG, "DocumentSnapshot successfully written!");
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.w(TAG, "Error writing document", e);
+                                        }
+                                    });
 
                             // Set the result of the TaskCompletionSource to true
                             taskCompletionSource.setResult(true);
@@ -63,14 +95,7 @@ public class FirebasePersonalUtils {
         return taskCompletionSource.getTask();
     }
 
-    public boolean checkCurrentUser(FirebaseAuth mAuth){
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            return true;
-        }
-        return false;
-    }
+
 }
 
 
