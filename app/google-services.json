@@ -12,7 +12,20 @@
           "package_name": "com.neztech.serah"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "223935006988-socil3lbj64hpq1gvlpnbad5oq1avpof.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.neztech.serah",
+            "certificate_hash": "1327661b63425cae69a7165c4bcdcabbf7deed8f"
+          }
+        },
+        {
+          "client_id": "223935006988-epvml84o1sfq3mqifmch1mjh95152po1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAAIfKjS_q4T4arhV3NC6s_arUxrA4b4xs"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "223935006988-epvml84o1sfq3mqifmch1mjh95152po1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

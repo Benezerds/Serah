@@ -97,6 +97,7 @@ public class FirebasePersonalUtils {
 
 
     //  RESET ACCOUNT WITH EMAIL
+    @NonNull
     public static Task<Void> resetPassword(String email){
         FirebaseAuth auth = FirebaseAuth.getInstance();
 
@@ -110,6 +111,28 @@ public class FirebasePersonalUtils {
                     }
                 });
     }
+
+    //  LOGIN WITH EMAIL
+    @NonNull
+    public static Task<Boolean> loginWithEmail(String email, String password){
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        TaskCompletionSource<Boolean> taskCompletionSource = new TaskCompletionSource<>();
+
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            taskCompletionSource.setResult(true);
+                        } else {
+                            taskCompletionSource.setResult(false);
+                        }
+                    }
+                });
+
+        return taskCompletionSource.getTask();
+    }
+
 
 
     public static boolean checkCurrentUser(FirebaseAuth mAuth){

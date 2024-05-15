@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +14,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.neztech.serah.R;
 import com.neztech.serah.activity.MainMenuActivity;
@@ -75,5 +78,36 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        //  LOGIN Functionality
+        buttonLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebasePersonalUtils.loginWithEmail(emailInput.getText().toString(), passInput.getText().toString())
+                        .addOnCompleteListener(new OnCompleteListener<Boolean>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Boolean> task) {
+                                if (task.isSuccessful() && task.getResult()) {
+                                    Snackbar.make(view, "Login successful", Snackbar.LENGTH_SHORT)
+                                            .addCallback(new Snackbar.Callback() {
+                                                @Override
+                                                public void onDismissed(Snackbar snackbar, int event) {
+                                                    // Snackbar dismissed, start the new activity
+                                                    Intent intent = new Intent(LoginActivity.this, MainMenuActivity.class);
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                    startActivity(intent);
+                                                    finish(); // call this on your LoginActivity
+                                                }
+                                            }).show();
+                                } else {
+                                    // Handle failure
+                                    Snackbar.make(view, "Login failed", Snackbar.LENGTH_LONG).show();
+                                }
+                            }
+                        });
+            }
+        });
+
+
     }
 }

@@ -25,6 +25,7 @@
             android:exported="false" />
         <activity
             android:name=".authentication.LoginActivity"
+            android:noHistory="true"
             android:exported="false" />
         <activity
             android:name=".activity.MainMenuActivity"
