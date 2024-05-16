@@ -1,26 +1,39 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.MainMenuActivity">
+    android:orientation="vertical">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/searchTopBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.search.SearchBar
+            android:id="@+id/searchTopBar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Search"
+            app:menu="@menu/profile_menu" />
+    </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
-        android:id="@+id/ll_done"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/bg_rect"
-        android:paddingStart="60dp"
-        android:paddingEnd="60dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp">
+
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Done"
-            android:textColor="@android:color/white"/>
+            android:text="What do you crave, Gerald?"
+            android:fontFamily="@font/epilogue_regular"
+            android:textSize="20sp" />
+
+
     </LinearLayout>
-</RelativeLayout>
+
+</LinearLayout>
