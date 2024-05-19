@@ -9,6 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20ssp"
         android:orientation="horizontal"
         android:layout_gravity="center_horizontal">
 
@@ -42,6 +43,7 @@
         android:padding="20dp">
 
         <TextView
+            android:id="@+id/text_view_user_welcome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/epilogue_regular"

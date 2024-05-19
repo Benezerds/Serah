@@ -5,24 +5,25 @@ import com.google.firebase.firestore.GeoPoint;
 
 public class User {
     private String username;
-    private String phone_number;
+    private String phoneNumber;
     private GeoPoint location;
-    private String last_name;
-    private String first_name;
+    private String full_name;
     private String email;
     private Timestamp created_time;
 
-    public User(String username, String phone_number, GeoPoint location, String last_name, String first_name, String email, Timestamp created_time) {
+    public User() {
+
+    }
+
+    public User(String username, String phoneNumber, GeoPoint location, String full_name, String email, Timestamp created_time) {
         this.username = username;
-        this.phone_number = phone_number;
+        this.phoneNumber = phoneNumber;
         this.location = location;
-        this.last_name = last_name;
-        this.first_name = first_name;
+        this.full_name = full_name;
         this.email = email;
         this.created_time = created_time;
     }
 
-    //  Getter and Setter
     public String getUsername() {
         return username;
     }
@@ -31,12 +32,12 @@ public class User {
         this.username = username;
     }
 
-    public String getPhone_number() {
-        return phone_number;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public GeoPoint getLocation() {
@@ -47,20 +48,12 @@ public class User {
         this.location = location;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getFull_name() {
+        return full_name;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
-    }
-
-    public String getFirst_name() {
-        return first_name;
-    }
-
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFull_name(String full_name) {
+        this.full_name = full_name;
     }
 
     public String getEmail() {
@@ -78,5 +71,4 @@ public class User {
     public void setCreated_time(Timestamp created_time) {
         this.created_time = created_time;
     }
-
 }

@@ -58,7 +58,7 @@ public class FirebasePersonalUtils {
                             // Create a new user with a first and last name
                             Map<String, Object> userMap = new HashMap<>();
                             userMap.put("email", email);
-                            userMap.put("full_Name", fullName);
+                            userMap.put("full_name", fullName);
                             userMap.put("phoneNumber", phoneNumber);
                             userMap.put("created_time", Timestamp.now());
                             userMap.put("location", "");
