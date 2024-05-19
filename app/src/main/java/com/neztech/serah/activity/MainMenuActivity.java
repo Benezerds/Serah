@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.activity.EdgeToEdge;
@@ -27,17 +28,28 @@ import com.bumptech.glide.request.target.Target;
 import com.google.firebase.auth.FirebaseAuth;
 import com.neztech.serah.R;
 import com.neztech.serah.authentication.LoginActivity;
+import com.neztech.serah.profile.ProfileActivity;
 
 import java.util.Random;
 
 public class MainMenuActivity extends AppCompatActivity {
     LinearLayout button;
+    ImageView profileIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main_menu);
+
+        profileIcon = findViewById(R.id.image_view_profile);
+        profileIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainMenuActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
 
 //        button = findViewById(R.id.ll_done);
 //

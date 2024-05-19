@@ -6,20 +6,35 @@
     android:orientation="vertical">
 
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/searchTopBarLayout"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal">
 
-        <com.google.android.material.search.SearchBar
-            android:id="@+id/searchTopBar"
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/searchTopBarLayout"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.search.SearchBar
+                android:id="@+id/searchTopBar"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Search"/>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <ImageView
+            android:id="@+id/image_view_profile"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="Search"
-            app:menu="@menu/profile_menu" />
-    </com.google.android.material.appbar.AppBarLayout>
+            android:layout_height="match_parent"
+            android:src="@drawable/profile_avatar"
+            android:layout_marginRight="20dp"
+            />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,8 +44,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="What do you crave, Gerald?"
             android:fontFamily="@font/epilogue_regular"
+            android:text="What do you crave, Gerald?"
             android:textSize="20sp" />
 
 
