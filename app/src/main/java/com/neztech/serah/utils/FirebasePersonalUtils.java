@@ -16,6 +16,9 @@ import com.google.android.gms.tasks.TaskCompletionSource;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.GeoPoint;
@@ -34,6 +37,7 @@ public class FirebasePersonalUtils {
 
     public Task<Boolean> createAccountWithEmail(String email, String password, String fullName, String phoneNumber){
         // Initialize Firebase Auth
+        Log.d(TAG, "Intiaiting creating account with Email");
         mAuth = FirebaseAuth.getInstance();
 
         // Create a new TaskCompletionSource
@@ -87,6 +91,22 @@ public class FirebasePersonalUtils {
 
                             // Set the result of the TaskCompletionSource to false
                             taskCompletionSource.setResult(false);
+
+                            Exception exception = task.getException();
+                            if (exception instanceof FirebaseAuthWeakPasswordException) {
+                                Toast.makeText(activity, "The password is too weak.", Toast.LENGTH_SHORT).show();
+                            } else if (exception instanceof FirebaseAuthInvalidCredentialsException) {
+                                Toast.makeText(activity, "The email address is malformed.", Toast.LENGTH_SHORT).show();
+                            } else if (exception instanceof FirebaseAuthUserCollisionException) {
+                                Toast.makeText(activity, "An account already exists with this email address.", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(activity, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                            }
+                            Log.w(TAG, "createUserWithEmail:failure", exception);
+
+                            // Set the result of the TaskCompletionSource to false
+                            taskCompletionSource.setResult(false);
+
                         }
                     }
                 });

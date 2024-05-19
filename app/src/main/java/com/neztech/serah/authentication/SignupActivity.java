@@ -62,6 +62,7 @@ public class SignupActivity extends AppCompatActivity {
             public void onClick(View view) {
                 FirebasePersonalUtils mUtils = new FirebasePersonalUtils(SignupActivity.this);
 
+                Log.d(TAG, "createUserWithEmail:failed");
                 mUtils.createAccountWithEmail(emailInput.getText().toString(), passInput.getText().toString(), nameInput.getText().toString(), phoneInput.getText().toString()).addOnCompleteListener(new OnCompleteListener<Boolean>() {
                     @Override
                     public void onComplete(@NonNull Task<Boolean> task) {
@@ -70,6 +71,7 @@ public class SignupActivity extends AppCompatActivity {
                             startActivity(intent);
                         } else {
                             // Handle failure here
+                            Log.d(TAG, "createUserWithEmail:failed");
                         }
                     }
                 });

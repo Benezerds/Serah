@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         // Check if the user is logged in
         boolean loggedIn = FirebasePersonalUtils.checkCurrentUser(mAuth);
 
-        if (loggedIn = true) {
+        if (loggedIn) {
             FirebaseUser user = mAuth.getCurrentUser();
             if (user != null) {
                 String uid = user.getUid();
@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             startLoginActivity();
         }
+
     }
 
     public void startLoginActivity() {

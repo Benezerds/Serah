@@ -1,10 +1,238 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".restaurant.RestaurantDetailsActivity">
+    android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Header Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/backArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="back_arrow"
+            android:src="@drawable/navigation" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="The Bistro"
+            android:textSize="20sp" />
+
+
+        <ImageView
+            android:id="@+id/forwardArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:contentDescription="forward_arrow"
+            android:src="@drawable/ic_forward" />
+    </LinearLayout>
+
+    <!-- Scroll View Section -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <!-- Container to encapsulate for Scroll View -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="@color/button" />
+
+                <!-- Resto Rating, Price and Tables Section -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/rating"
+                        android:layout_width="112dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/epilogue_black"
+                                android:gravity="top|center_horizontal"
+                                android:text="⭐ 4.8"
+                                android:textSize="@dimen/_20ssp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_5ssp"
+                                android:fontFamily="@font/epilogue_regular"
+                                android:gravity="center"
+                                android:text="Rating"
+                                android:textColor="#9C594A" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/price"
+                        android:layout_width="112dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/_12ssp"
+                        android:layout_marginRight="@dimen/_12ssp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/epilogue_bold"
+                                android:gravity="top|center_horizontal"
+                                android:text="$$$$"
+                                android:textSize="@dimen/_20ssp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_5ssp"
+                                android:fontFamily="@font/epilogue_regular"
+                                android:gravity="center"
+                                android:text="Price"
+                                android:textColor="#9C594A" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/tables"
+                        android:layout_width="112dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/epilogue_bold"
+                                android:gravity="top|center_horizontal"
+                                android:text="20"
+                                android:textSize="@dimen/_20ssp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_5ssp"
+                                android:fontFamily="@font/epilogue_regular"
+                                android:gravity="center"
+                                android:text="Tables"
+                                android:textColor="#9C594A" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/location"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/text_view_location"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/epilogue_bold"
+                            android:gravity="top|center_horizontal"
+                            android:text="FX Sudirman Mall"
+                            android:textSize="@dimen/_19ssp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10ssp"
+                            android:fontFamily="@font/epilogue_regular"
+                            android:gravity="center"
+                            android:text="Location"
+                            android:textColor="#9C594A" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
+                <!-- About Resto Section -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6sp"
+                        android:fontFamily="@font/epilogue_bold"
+                        android:text="About this restaurant"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/epilogue_regular"
+                        android:text="The Bistro is a destination for the best in seasonal and responsibly-sourced ingredients, with an approachable menu of refined contemporary French dishes. Our wine list offers a diverse selection of wines from around the world." />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_login"
+        android:layout_width="180dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/primary"
+        android:fontFamily="@font/epilogue_regular"
+        android:text="@string/login"
+        android:textColor="@color/secondary"
+        android:layout_marginBottom="20dp"/>
+
+</LinearLayout>
