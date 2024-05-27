@@ -6,7 +6,6 @@
     android:orientation="vertical"
     tools:context=".activity.MainMenuActivity">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -55,4 +54,58 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/plusjakartasans_bold"
+            android:text="Feeling Indecisive?"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/plusjakartasans_light"
+            android:text="Try our unique features to make your selecting a restaurant experience feel special"
+            android:textSize="@dimen/_12ssp" />
+
+        <!-- Image Roulette Card Section To Be Inserted -->
+
+
+        <!-- Featured resto section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/epilogue_bold"
+                android:text="What's Poppin' 🔥"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/plusjakartasans_light"
+                android:text="Try our unique features to make your selecting a restaurant experience feel special"
+                android:textSize="@dimen/_12ssp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_nearby_resto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_14ssp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
 </LinearLayout>
