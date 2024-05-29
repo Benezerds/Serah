@@ -48,6 +48,11 @@ public class FirebasePersonalUtils {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            //  Dummy location
+                            double latitude = -6.2246609788870995;
+                            double longitude = 106.80404313169664;
+                            GeoPoint location = new GeoPoint(latitude, longitude);
+
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
@@ -61,7 +66,7 @@ public class FirebasePersonalUtils {
                             userMap.put("full_name", fullName);
                             userMap.put("phoneNumber", phoneNumber);
                             userMap.put("created_time", Timestamp.now());
-                            userMap.put("location", "");
+                            userMap.put("location", location);
                             userMap.put("username", fullName);
 
 

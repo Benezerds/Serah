@@ -3,19 +3,25 @@ package com.neztech.serah.model;
 import com.google.firebase.firestore.GeoPoint;
 
 public class Restaurant {
-    private int restaurantId;
-    private int categoryId;
-    private String name;
+    private String restaurantId;
+//    private String categoryId; To be implemented next update
+    private String restoName;
+    private String restoImageUrl;
     private String description;
     private double rating;
     private GeoPoint location;
+
     private String openingHours;
     private String contactNumber;
 
-    public Restaurant(int restaurantId, int categoryId, String name, String description, double rating, GeoPoint location, String openingHours, String contactNumber) {
+    public Restaurant(){
+
+    }
+
+    public Restaurant(String restaurantId, int categoryId, String restoName, String restoImageUrl, String description, double rating, GeoPoint location, String openingHours, String contactNumber) {
         this.restaurantId = restaurantId;
-        this.categoryId = categoryId;
-        this.name = name;
+        this.restoName = restoName;
+        this.restoImageUrl = restoImageUrl;
         this.description = description;
         this.rating = rating;
         this.location = location;
@@ -23,28 +29,28 @@ public class Restaurant {
         this.contactNumber = contactNumber;
     }
 
-    public int getRestaurantId() {
+    public String getRestaurantId() {
         return restaurantId;
     }
 
-    public void setRestaurantId(int restaurantId) {
+    public void setRestaurantId(String restaurantId) {
         this.restaurantId = restaurantId;
     }
 
-    public int getCategoryId() {
-        return categoryId;
+    public String getRestoName() {
+        return restoName;
     }
 
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
+    public void setRestoName(String restoName) {
+        this.restoName = restoName;
     }
 
-    public String getName() {
-        return name;
+    public String getRestoImageUrl() {
+        return restoImageUrl;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRestoImageUrl(String restoImageUrl) {
+        this.restoImageUrl = restoImageUrl;
     }
 
     public String getDescription() {
@@ -87,5 +93,17 @@ public class Restaurant {
         this.contactNumber = contactNumber;
     }
 
-
+    @Override
+    public String toString() {
+        return "Restaurant{" +
+                "restaurantId=" + restaurantId +
+                ", restoName='" + restoName + '\'' +
+                ", restoImageUrl='" + restoImageUrl + '\'' +
+                ", description='" + description + '\'' +
+                ", rating=" + rating +
+                ", location=" + location +
+                ", openingHours='" + openingHours + '\'' +
+                ", contactNumber='" + contactNumber + '\'' +
+                '}';
+    }
 }
