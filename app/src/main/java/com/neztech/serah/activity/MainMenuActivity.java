@@ -97,22 +97,23 @@ public class MainMenuActivity extends AppCompatActivity implements MyRecyclerVie
         Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
     }
 
-    public void getPoppingRestoData(){
+    public void getPoppingRestoData() {
         RecyclerView poppingRecyclerView = findViewById(R.id.recycler_view_poppin_resto);
 
         LinearLayoutManager poppingLayoutManager = new LinearLayoutManager(this);
         poppingLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         poppingRecyclerView.setLayoutManager(poppingLayoutManager);
 
-        // Assume you have a method getRestaurants() that returns a List of Restaurant objects
-        List<Restaurant> restaurants = RestaurantUtils.getRestaurants();
+        // Assume you have a method getFeaturedRestaurants that fetches the data asynchronously
+        RestaurantUtils.getFeaturedRestaurants(fetchedRestaurants -> {
+            // Create an instance of the adapter and pass the fetched data to it
+            PoppingRestoRecyclerViewAdapter adapter = new PoppingRestoRecyclerViewAdapter(this, fetchedRestaurants);
 
-        // Create an instance of the adapter and pass the data to it
-        PoppingRestoRecyclerViewAdapter adapter = new PoppingRestoRecyclerViewAdapter(this, restaurants);
-
-        // Set the adapter to the RecyclerView
-        poppingRecyclerView.setAdapter(adapter);
+            // Set the adapter to the RecyclerView
+            poppingRecyclerView.setAdapter(adapter);
+        });
     }
+
 
 
 
