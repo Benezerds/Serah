@@ -43,8 +43,7 @@ public class UserUtils {
     }
 
     public static Task<User> fetchUsersDataByUid(String uid) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference userRef = db.collection("users").document(uid);
+        DocumentReference userRef = db.collection("User").document(uid);
 
         // Fetch the user data from Firestore
         return userRef.get().continueWith(task -> {
