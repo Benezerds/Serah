@@ -1,15 +1,13 @@
 package com.neztech.serah.model;
 
-import com.google.firebase.firestore.GeoPoint;
-
 public class Restaurant {
     private String RestaurantId;
-    private String CategoryId;
+    private String category;
     private String restoName;
     private String restoImageUrl;
     private String description;
     private double rating;
-    private GeoPoint location;
+    private String location;
 
     private String openingHours;
     private String contactNumber;
@@ -18,9 +16,9 @@ public class Restaurant {
 
     }
 
-    public Restaurant(String restaurantId, String categoryId, String restoName, String restoImageUrl, String description, double rating, GeoPoint location, String openingHours, String contactNumber) {
+    public Restaurant(String restaurantId, String category, String restoName, String restoImageUrl, String description, double rating, String location, String openingHours, String contactNumber) {
         RestaurantId = restaurantId;
-        CategoryId = categoryId;
+        this.category = category;
         this.restoName = restoName;
         this.restoImageUrl = restoImageUrl;
         this.description = description;
@@ -38,12 +36,12 @@ public class Restaurant {
         this.RestaurantId = restaurantId;
     }
 
-    public String getCategoryId() {
-        return CategoryId;
+    public String getCategory() {
+        return category;
     }
 
-    public void setCategoryId(String categoryId) {
-        CategoryId = categoryId;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getRestoName() {
@@ -78,11 +76,11 @@ public class Restaurant {
         this.rating = rating;
     }
 
-    public GeoPoint getLocation() {
+    public String getLocation() {
         return location;
     }
 
-    public void setLocation(GeoPoint location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 
