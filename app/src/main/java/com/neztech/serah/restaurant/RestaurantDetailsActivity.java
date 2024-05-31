@@ -1,6 +1,9 @@
 package com.neztech.serah.restaurant;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +19,7 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
     TextView description;
 
     Restaurant restaurant;
+    Button reservationButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +41,20 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
         String[] parts = locationTemplate.split(",");
         String location = parts[0]; // Get the first part (location)
 
-// Set the location text
+        // Set the location text
         restoLocation.setText(location);
         description.setText(restaurant.getDescription());
+
+        reservationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Create an Intent to navigate to RestaurantDetailsActivity
+                Intent intent = new Intent(RestaurantDetailsActivity.this, RestaurantReviewActivity.class);
+                // Pass the clicked restaurant data using serialization
+                intent.putExtra("restodata", restaurant); // Assuming Restaurant implements Serializable
+                RestaurantDetailsActivity.this.startActivity(intent);
+            }
+        });
     }
 
 
@@ -49,6 +64,7 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
         restoTables = findViewById(R.id.text_view_restodetails_tables);
         restoLocation = findViewById(R.id.text_view_restodetails_location);
         description = findViewById(R.id.text_view_restodetails_description);
+        reservationButton = findViewById(R.id.button_restaurantdetails_reservation);
     }
 
 }

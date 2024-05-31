@@ -230,7 +230,7 @@
     </RelativeLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_login"
+        android:id="@+id/button_restaurantdetails_reservation"
         android:layout_width="227dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
