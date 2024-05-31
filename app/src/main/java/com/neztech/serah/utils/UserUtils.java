@@ -2,8 +2,10 @@ package com.neztech.serah.utils;
 
 import android.util.Log;
 
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.neztech.serah.interfaceutil.OnUserFetched;
@@ -39,5 +41,24 @@ public class UserUtils {
             }
         });
     }
+
+    public static Task<User> fetchUsersDataByUid(String uid) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference userRef = db.collection("users").document(uid);
+
+        // Fetch the user data from Firestore
+        return userRef.get().continueWith(task -> {
+            if (task.isSuccessful()) {
+                // DocumentSnapshot contains the user data
+                User user = task.getResult().toObject(User.class);
+                return user;
+            } else {
+                // Handle the error (e.g., document not found)
+                Log.d(TAG, "No such document");
+                return null;
+            }
+        });
+    }
+
 
 }

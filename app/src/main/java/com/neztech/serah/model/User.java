@@ -1,12 +1,11 @@
 package com.neztech.serah.model;
 
 import com.google.firebase.Timestamp;
-import com.google.firebase.firestore.GeoPoint;
 
 public class User {
     private String username;
     private String phoneNumber;
-    private GeoPoint location;
+    private String location;
     private String full_name;
     private String email;
     private Timestamp created_time;
@@ -15,7 +14,7 @@ public class User {
 
     }
 
-    public User(String username, String phoneNumber, GeoPoint location, String full_name, String email, Timestamp created_time) {
+    public User(String username, String phoneNumber, String location, String full_name, String email, Timestamp created_time) {
         this.username = username;
         this.phoneNumber = phoneNumber;
         this.location = location;
@@ -40,11 +39,11 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public GeoPoint getLocation() {
+    public String getLocation() {
         return location;
     }
 
-    public void setLocation(GeoPoint location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 

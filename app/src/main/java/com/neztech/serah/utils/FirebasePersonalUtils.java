@@ -49,9 +49,7 @@ public class FirebasePersonalUtils {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             //  Dummy location
-                            double latitude = -6.2246609788870995;
-                            double longitude = 106.80404313169664;
-                            GeoPoint location = new GeoPoint(latitude, longitude);
+                            String location = "6.224522326292532, 106.80396266550231";
 
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");

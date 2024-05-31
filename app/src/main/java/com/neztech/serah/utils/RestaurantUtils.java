@@ -9,8 +9,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.neztech.serah.model.Restaurant;
+import com.neztech.serah.model.Review;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class RestaurantUtils {
@@ -76,5 +78,10 @@ public class RestaurantUtils {
                     }
                 });
     }
+
+
+//    public static List<Review> fetchRestaurantReviews(String RestaurantId) {
+//
+//    }
 
 }
