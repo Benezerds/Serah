@@ -1,6 +1,8 @@
 package com.neztech.serah.model;
 
-public class Restaurant {
+import java.io.Serializable;
+
+public class Restaurant implements Serializable {
     private String RestaurantId;
     private String category;
     private String restoName;

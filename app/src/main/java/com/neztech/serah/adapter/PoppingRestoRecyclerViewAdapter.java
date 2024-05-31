@@ -1,11 +1,14 @@
 package com.neztech.serah.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.neztech.serah.restaurant.RestaurantDetailsActivity;
 import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
@@ -19,10 +22,12 @@ import java.util.List;
 public class PoppingRestoRecyclerViewAdapter extends RecyclerView.Adapter<PoppingRestoRecyclerViewAdapter.ViewHolder> {
     private List<Restaurant> restaurants;
     private LayoutInflater mInflater;
+    private Context context;
 
     public PoppingRestoRecyclerViewAdapter(Context context, List<Restaurant> restaurants) {
         this.mInflater = LayoutInflater.from(context);
         this.restaurants = restaurants;
+        this.context = context;
     }
 
     @NonNull
@@ -45,7 +50,17 @@ public class PoppingRestoRecyclerViewAdapter extends RecyclerView.Adapter<Poppin
                 .placeholder(R.drawable.resto) // optional, placeholder image while loading or in case of error
                 .error(R.drawable.splash) // optional, image to use in case of error
                 .into(holder.restoImage); // your ImageView to load the image into
+
+        // Handle item click
+        holder.itemView.setOnClickListener(v -> {
+            // Create an Intent to navigate to RestaurantDetailsActivity
+            Intent intent = new Intent(context, RestaurantDetailsActivity.class);
+            // Pass the clicked restaurant data using serialization
+            intent.putExtra("selectedRestaurant", restaurant); // Assuming Restaurant implements Serializable
+            context.startActivity(intent);
+        });
     }
+
 
     @Override
     public int getItemCount() {
