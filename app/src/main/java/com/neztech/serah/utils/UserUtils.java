@@ -42,22 +42,27 @@ public class UserUtils {
         });
     }
 
-    public static Task<User> fetchUsersDataByUid(String uid) {
-        DocumentReference userRef = db.collection("User").document(uid);
-
+    public static Task<User> fetchUsersDataByReference(DocumentReference userRef) {
         // Fetch the user data from Firestore
         return userRef.get().continueWith(task -> {
             if (task.isSuccessful()) {
-                // DocumentSnapshot contains the user data
-                User user = task.getResult().toObject(User.class);
-                return user;
+                DocumentSnapshot doc = task.getResult();
+                if (doc.exists()) {
+                    // DocumentSnapshot contains the user data
+                    User user = doc.toObject(User.class);
+                    return user;
+                } else {
+                    Log.d(TAG, "Document does not exist");
+                    return null;
+                }
             } else {
-                // Handle the error (e.g., document not found)
-                Log.d(TAG, "No such document");
+                // Handle the error (e.g., network issues)
+                Log.e(TAG, "Error fetching user data", task.getException());
                 return null;
             }
         });
     }
+
 
 
 }

@@ -2,9 +2,10 @@ package com.neztech.serah.model;
 
 import com.google.firebase.Timestamp;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Review {
+public class Review implements Serializable {
     String ReviewId;
     String comment;
     Date date;

@@ -1,6 +1,12 @@
 package com.neztech.serah.restaurant;
 
+import static androidx.fragment.app.FragmentManager.TAG;
+
+import android.annotation.SuppressLint;
+import android.content.ContentValues;
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -12,6 +18,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.neztech.serah.R;
+import com.neztech.serah.model.Restaurant;
+import com.neztech.serah.model.Review;
+import com.neztech.serah.utils.RestaurantUtils;
+
+import java.util.List;
 
 public class RestaurantReviewActivity extends AppCompatActivity {
     TextView title;
@@ -29,14 +40,35 @@ public class RestaurantReviewActivity extends AppCompatActivity {
     TextView percentage2;
     TextView percentage1;
 
+    Restaurant restaurant;
+    List<Review> reviews;
 
+
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_restaurant_review);
 
+        variableInitiation();
 
+        if (getIntent().getExtras() != null) {
+            restaurant = (Restaurant) getIntent().getSerializableExtra("restodata");
+        }
+
+
+        RestaurantUtils.fetchRestaurantReviews(restaurant.getRestaurantId())
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // Task completed successfully
+                        reviews = task.getResult();
+                        // Now you can use the reviews data
+                    } else {
+                        // Handle the error (e.g., log or display an error message)
+                        Log.d(TAG, "Error fetching restaurant reviews", task.getException());
+                    }
+                });
     }
 
 

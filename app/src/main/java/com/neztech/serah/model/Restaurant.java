@@ -1,5 +1,6 @@
 package com.neztech.serah.model;
 
+
 import java.io.Serializable;
 
 public class Restaurant implements Serializable {

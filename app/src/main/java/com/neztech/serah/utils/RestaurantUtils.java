@@ -4,12 +4,15 @@ import static android.content.ContentValues.TAG;
 
 import android.util.Log;
 
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.neztech.serah.model.Restaurant;
 import com.neztech.serah.model.Review;
+import com.neztech.serah.model.User;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -80,8 +83,32 @@ public class RestaurantUtils {
     }
 
 
-//    public static List<Review> fetchRestaurantReviews(String RestaurantId) {
-//
-//    }
+    public static Task<List<Review>> fetchRestaurantReviews(String restaurantId) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        CollectionReference reviewsRef = db.collection("Review");
+
+        // Query reviews for the specified restaurant
+        return reviewsRef.whereEqualTo("RestaurantId", restaurantId).get()
+                .continueWith(task -> {
+                    if (task.isSuccessful()) {
+                        // Convert QuerySnapshot to a list of Review objects
+                        List<Review> reviews = new ArrayList<>();
+                        for (DocumentSnapshot doc : task.getResult()) {
+
+                            // Fetch user data for this review
+                            DocumentReference createdByRef = doc.getDocumentReference("uid");
+
+                            User user = UserUtils.fetchUsersDataByReference(createdByRef).getResult(); // Assuming you have a fetchUserDataByUid function
+                            Review review = doc.toObject(Review.class);
+                            review.setUser(user);
+                            reviews.add(review);
+                        }
+                        return reviews;
+                    } else {
+                        // Handle the error (e.g., no reviews found)
+                        return null;
+                    }
+                });
+    }
 
 }

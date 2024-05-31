@@ -10,6 +10,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.neztech.serah.R;
 import com.neztech.serah.model.Restaurant;
+import com.neztech.serah.model.Review;
+import com.neztech.serah.utils.RestaurantUtils;
+
+import java.util.List;
 
 public class RestaurantDetailsActivity extends AppCompatActivity {
     TextView restoName;
@@ -51,7 +55,7 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
                 // Create an Intent to navigate to RestaurantDetailsActivity
                 Intent intent = new Intent(RestaurantDetailsActivity.this, RestaurantReviewActivity.class);
                 // Pass the clicked restaurant data using serialization
-                intent.putExtra("restodata", restaurant); // Assuming Restaurant implements Serializable
+                intent.putExtra("restodata", restaurant);
                 RestaurantDetailsActivity.this.startActivity(intent);
             }
         });
