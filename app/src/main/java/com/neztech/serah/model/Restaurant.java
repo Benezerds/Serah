@@ -3,8 +3,8 @@ package com.neztech.serah.model;
 import com.google.firebase.firestore.GeoPoint;
 
 public class Restaurant {
-    private String restaurantId;
-//    private String categoryId; To be implemented next update
+    private String RestaurantId;
+    private String CategoryId;
     private String restoName;
     private String restoImageUrl;
     private String description;
@@ -18,8 +18,9 @@ public class Restaurant {
 
     }
 
-    public Restaurant(String restaurantId, int categoryId, String restoName, String restoImageUrl, String description, double rating, GeoPoint location, String openingHours, String contactNumber) {
-        this.restaurantId = restaurantId;
+    public Restaurant(String restaurantId, String categoryId, String restoName, String restoImageUrl, String description, double rating, GeoPoint location, String openingHours, String contactNumber) {
+        RestaurantId = restaurantId;
+        CategoryId = categoryId;
         this.restoName = restoName;
         this.restoImageUrl = restoImageUrl;
         this.description = description;
@@ -30,11 +31,19 @@ public class Restaurant {
     }
 
     public String getRestaurantId() {
-        return restaurantId;
+        return RestaurantId;
     }
 
     public void setRestaurantId(String restaurantId) {
-        this.restaurantId = restaurantId;
+        this.RestaurantId = restaurantId;
+    }
+
+    public String getCategoryId() {
+        return CategoryId;
+    }
+
+    public void setCategoryId(String categoryId) {
+        CategoryId = categoryId;
     }
 
     public String getRestoName() {
@@ -96,7 +105,7 @@ public class Restaurant {
     @Override
     public String toString() {
         return "Restaurant{" +
-                "restaurantId=" + restaurantId +
+                "restaurantId=" + RestaurantId +
                 ", restoName='" + restoName + '\'' +
                 ", restoImageUrl='" + restoImageUrl + '\'' +
                 ", description='" + description + '\'' +
