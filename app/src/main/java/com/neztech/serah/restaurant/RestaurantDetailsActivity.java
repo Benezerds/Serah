@@ -30,7 +30,7 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
 
         restoName.setText(restaurant.getRestoName());
         restoRating.setText("⭐ " + String.valueOf(restaurant.getRating()));
-//        restoTables.setText(restaurant.getTables());
+        restoTables.setText(String.valueOf(restaurant.getTables()));
 
         // Assuming restaurant.getLocation() returns the entire template (e.g., "Seattle, 47.6062, -122.3321")
         String locationTemplate = restaurant.getLocation();

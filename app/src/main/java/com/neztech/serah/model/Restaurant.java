@@ -13,12 +13,13 @@ public class Restaurant implements Serializable {
 
     private String openingHours;
     private String contactNumber;
+    private int tables;
 
     public Restaurant(){
 
     }
 
-    public Restaurant(String restaurantId, String category, String restoName, String restoImageUrl, String description, double rating, String location, String openingHours, String contactNumber) {
+    public Restaurant(String restaurantId, String category, String restoName, String restoImageUrl, String description, double rating, String location, String openingHours, String contactNumber, int tables) {
         RestaurantId = restaurantId;
         this.category = category;
         this.restoName = restoName;
@@ -28,6 +29,7 @@ public class Restaurant implements Serializable {
         this.location = location;
         this.openingHours = openingHours;
         this.contactNumber = contactNumber;
+        this.tables = tables;
     }
 
     public String getRestaurantId() {
@@ -102,17 +104,27 @@ public class Restaurant implements Serializable {
         this.contactNumber = contactNumber;
     }
 
+    public int getTables() {
+        return tables;
+    }
+
+    public void setTables(int tables) {
+        this.tables = tables;
+    }
+
     @Override
     public String toString() {
         return "Restaurant{" +
-                "restaurantId=" + RestaurantId +
+                "RestaurantId='" + RestaurantId + '\'' +
+                ", category='" + category + '\'' +
                 ", restoName='" + restoName + '\'' +
                 ", restoImageUrl='" + restoImageUrl + '\'' +
                 ", description='" + description + '\'' +
                 ", rating=" + rating +
-                ", location=" + location +
+                ", location='" + location + '\'' +
                 ", openingHours='" + openingHours + '\'' +
                 ", contactNumber='" + contactNumber + '\'' +
+                ", tables=" + tables +
                 '}';
     }
 }
