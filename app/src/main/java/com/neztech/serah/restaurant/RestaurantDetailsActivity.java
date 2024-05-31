@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.neztech.serah.R;
 import com.neztech.serah.model.Restaurant;
@@ -24,6 +25,7 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
 
     Restaurant restaurant;
     Button reservationButton;
+    CardView cardViewRating;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +51,7 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
         restoLocation.setText(location);
         description.setText(restaurant.getDescription());
 
-        reservationButton.setOnClickListener(new View.OnClickListener() {
+        cardViewRating.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Create an Intent to navigate to RestaurantDetailsActivity
@@ -68,6 +70,10 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
         restoTables = findViewById(R.id.text_view_restodetails_tables);
         restoLocation = findViewById(R.id.text_view_restodetails_location);
         description = findViewById(R.id.text_view_restodetails_description);
+
+
+        //  Card View & Button
+        cardViewRating = findViewById(R.id.card_view_rating);
         reservationButton = findViewById(R.id.button_restaurantdetails_reservation);
     }
 

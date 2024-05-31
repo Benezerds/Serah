@@ -68,7 +68,7 @@
                     android:orientation="horizontal">
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/rating"
+                        android:id="@+id/card_view_rating"
                         android:layout_width="112dp"
                         android:layout_height="100dp"
                         android:layout_gravity="center_vertical">
