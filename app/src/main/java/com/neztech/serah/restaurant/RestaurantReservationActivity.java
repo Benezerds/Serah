@@ -1,11 +1,15 @@
 package com.neztech.serah.restaurant;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +22,8 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.neztech.serah.R;
 import com.neztech.serah.model.Restaurant;
 
+import java.util.Locale;
+
 public class RestaurantReservationActivity extends AppCompatActivity {
     Restaurant restoData;
     Button button;
@@ -25,6 +31,8 @@ public class RestaurantReservationActivity extends AppCompatActivity {
     TextInputEditText pax;
     TextView dateAndTime;
     ImageView dateIcon;
+    int hour, minute;
+    String dateText;
 
 
     @Override
@@ -66,5 +74,30 @@ public class RestaurantReservationActivity extends AppCompatActivity {
 
     public void setContent() {
         restoName.setText(restoData.getRestoName());
+    }
+
+    private void showTimePicker(int year, int month, int day) {
+        TimePickerDialog.OnTimeSetListener onTimeSetListener = (timePicker, selectedHour, selectedMinute) -> {
+            hour = selectedHour;
+            minute = selectedMinute;
+
+            // Update the dateAndTime TextView with the selected date and time
+            dateAndTime.setText(String.format(Locale.getDefault(), "%02d.%02d.%04d %02d:%02d", day, month + 1, year, hour, minute));
+        };
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, onTimeSetListener, hour, minute, true);
+        timePickerDialog.setTitle("Select Time");
+        timePickerDialog.show();
+    }
+
+
+    public void popDateTimePicker(View view) {
+        // Show the date picker
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, (datePicker, year, month, day) -> {
+            // Date selected, now show the time picker
+            showTimePicker(year, month, day);
+        }, 2024, 5, 2); // Initial date (you can adjust this)
+
+        datePickerDialog.show();
     }
 }

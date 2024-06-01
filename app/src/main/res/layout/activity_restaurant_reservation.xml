@@ -136,9 +136,10 @@
                     android:layout_weight="1" />
 
                 <ImageView
+                    android:onClick="popDateTimePicker"
                     android:id="@+id/image_view_dateicon"
                     android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="end|center"
                     android:src="@drawable/ic_datepicker" />
             </LinearLayout>

@@ -116,18 +116,19 @@ public class RestaurantUtils {
 
     public static void createReservationDocument(String reservationId, Restaurant restaurant, String partySize, String reservationDate, String reservationStatus, User user) {
         // Reference to your Firestore collection for reservations
-        CollectionReference reservationsRef = FirebaseFirestore.getInstance().collection("reservations");
+        CollectionReference reservationsRef = FirebaseFirestore.getInstance().collection("Reservation");
 
         // Create a new reservation document
         DocumentReference newReservationRef = reservationsRef.document(reservationId);
 
         // Create a map to store reservation data
         Map<String, Object> reservationData = new HashMap<>();
-        reservationData.put("restaurantRef", "/Reservation/" + restaurant.getRestaurantId()); // Assuming you have a method to get the restaurant reference
+        reservationData.put("ReservationId", reservationId);
+        reservationData.put("RestaurantId", "/Reservation/" + restaurant.getRestaurantId()); // Assuming you have a method to get the restaurant reference
         reservationData.put("partySize", partySize);
         reservationData.put("reservationDate", reservationDate);
         reservationData.put("reservationStatus", reservationStatus);
-        reservationData.put("userRef", "/User/" + user.getUid()); // Assuming you have a method to get the user reference
+        reservationData.put("uid", "/User/" + user.getUid()); // Assuming you have a method to get the user reference
 
         // Set the fields for the reservation document
         newReservationRef.set(reservationData)

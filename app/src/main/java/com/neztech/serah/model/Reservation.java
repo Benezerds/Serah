@@ -5,17 +5,17 @@ import java.io.Serializable;
 public class Reservation implements Serializable {
     String ReservationId;
     Restaurant restaurant;
-    String party_size;
+    String partySize;
     String reservationDate;
-    String reservation_status;
+    String reservationStatus;
     User user;
 
-    public Reservation(String reservationId, Restaurant restaurant, String party_size, String reservationDate, String reservation_status, User user) {
+    public Reservation(String reservationId, Restaurant restaurant, String partySize, String reservationDate, String reservationStatus, User user) {
         ReservationId = reservationId;
         this.restaurant = restaurant;
-        this.party_size = party_size;
+        this.partySize = partySize;
         this.reservationDate = reservationDate;
-        this.reservation_status = reservation_status;
+        this.reservationStatus = reservationStatus;
         this.user = user;
     }
 
@@ -35,12 +35,12 @@ public class Reservation implements Serializable {
         this.restaurant = restaurant;
     }
 
-    public String getParty_size() {
-        return party_size;
+    public String getPartySize() {
+        return partySize;
     }
 
-    public void setParty_size(String party_size) {
-        this.party_size = party_size;
+    public void setPartySize(String partySize) {
+        this.partySize = partySize;
     }
 
     public String getReservationDate() {
@@ -51,12 +51,12 @@ public class Reservation implements Serializable {
         this.reservationDate = reservationDate;
     }
 
-    public String getReservation_status() {
-        return reservation_status;
+    public String getReservationStatus() {
+        return reservationStatus;
     }
 
-    public void setReservation_status(String reservation_status) {
-        this.reservation_status = reservation_status;
+    public void setReservationStatus(String reservationStatus) {
+        this.reservationStatus = reservationStatus;
     }
 
     public User getUser() {
@@ -72,9 +72,9 @@ public class Reservation implements Serializable {
         return "Reservation{" +
                 "ReservationId='" + ReservationId + '\'' +
                 ", restaurant=" + restaurant +
-                ", party_size='" + party_size + '\'' +
+                ", party_size='" + partySize + '\'' +
                 ", reservationDate='" + reservationDate + '\'' +
-                ", reservation_status='" + reservation_status + '\'' +
+                ", reservation_status='" + reservationStatus + '\'' +
                 ", user=" + user +
                 '}';
     }
