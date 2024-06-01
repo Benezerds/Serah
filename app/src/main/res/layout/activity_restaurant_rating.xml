@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:fitsSystemWindows="true">
 
     <!-- Header Section -->
     <LinearLayout
@@ -125,7 +126,7 @@
 
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_restaurantdetails_reservation"
+        android:id="@+id/button_restaurantrating_post"
         android:layout_width="227dp"
         android:layout_height="50dp"
         android:layout_gravity="center"

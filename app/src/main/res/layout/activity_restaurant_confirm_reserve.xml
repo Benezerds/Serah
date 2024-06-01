@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:fitsSystemWindows="true">
 
 
     <!-- Header Section -->
@@ -309,6 +310,7 @@
     </ScrollView>
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_confirm_reserve"
         android:layout_width="227dp"
         android:layout_height="50dp"
         android:layout_gravity="center"

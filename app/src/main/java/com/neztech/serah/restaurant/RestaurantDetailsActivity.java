@@ -51,6 +51,8 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
         restoLocation.setText(location);
         description.setText(restaurant.getDescription());
 
+
+        //  OnClick Listeners
         cardViewRating.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,6 +63,19 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
                 RestaurantDetailsActivity.this.startActivity(intent);
             }
         });
+
+        reservationButton = findViewById(R.id.button_restaurantdetails_reservation);
+        reservationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Create an Intent to navigate to RestaurantDetailsActivity
+                Intent intent = new Intent(RestaurantDetailsActivity.this, RestaurantReservationActivity.class);
+                // Pass the clicked restaurant data using serialization
+                intent.putExtra("restodata", restaurant);
+                RestaurantDetailsActivity.this.startActivity(intent);
+            }
+        });
+
     }
 
 
