@@ -83,7 +83,7 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_field_password"
+            android:id="@+id/text_field_password_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:boxStrokeWidth="0dp"
@@ -91,6 +91,7 @@
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/text_field_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -116,9 +117,9 @@
             android:fontFamily="@font/epilogue_regular"
             android:text="@string/signup"
             android:textColor="@color/secondary"
-            app:layout_constraintEnd_toEndOf="@+id/text_field_password"
-            app:layout_constraintStart_toStartOf="@+id/text_field_password"
-            app:layout_constraintTop_toBottomOf="@+id/text_field_password" />
+            app:layout_constraintEnd_toEndOf="@+id/text_field_password_layout"
+            app:layout_constraintStart_toStartOf="@+id/text_field_password_layout"
+            app:layout_constraintTop_toBottomOf="@+id/text_field_password_layout" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -137,7 +138,7 @@
                 android:text="New to us?" />
 
             <TextView
-                android:id="@+id/text_view_signup"
+                android:id="@+id/text_view_loginpage_signup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"

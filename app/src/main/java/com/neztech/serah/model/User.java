@@ -1,20 +1,20 @@
 package com.neztech.serah.model;
 
-import com.google.firebase.Timestamp;
+import java.io.Serializable;
 
-public class User {
+public class User implements Serializable {
     private String username;
     private String phoneNumber;
     private String location;
     private String full_name;
     private String email;
-    private Timestamp created_time;
+    private String created_time;
 
     public User() {
 
     }
 
-    public User(String username, String phoneNumber, String location, String full_name, String email, Timestamp created_time) {
+    public User(String username, String phoneNumber, String location, String full_name, String email, String created_time) {
         this.username = username;
         this.phoneNumber = phoneNumber;
         this.location = location;
@@ -63,11 +63,23 @@ public class User {
         this.email = email;
     }
 
-    public Timestamp getCreated_time() {
+    public String getCreated_time() {
         return created_time;
     }
 
-    public void setCreated_time(Timestamp created_time) {
+    public void setCreated_time(String created_time) {
         this.created_time = created_time;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", location='" + location + '\'' +
+                ", full_name='" + full_name + '\'' +
+                ", email='" + email + '\'' +
+                ", created_time=" + created_time +
+                '}';
     }
 }

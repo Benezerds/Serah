@@ -65,7 +65,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/userName"
+                android:id="@+id/text_view_fullName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Gerald Abiezer Lopez"
@@ -73,13 +73,13 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/userEmail"
+                android:id="@+id/text_view_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="gal007@gmail.com" />
 
             <TextView
-                android:id="@+id/userPhone"
+                android:id="@+id/text_view_phoneNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="081234567890" />

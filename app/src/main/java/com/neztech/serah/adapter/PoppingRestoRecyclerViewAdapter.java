@@ -56,7 +56,7 @@ public class PoppingRestoRecyclerViewAdapter extends RecyclerView.Adapter<Poppin
             // Create an Intent to navigate to RestaurantDetailsActivity
             Intent intent = new Intent(context, RestaurantDetailsActivity.class);
             // Pass the clicked restaurant data using serialization
-            intent.putExtra("selectedRestaurant", restaurant); // Assuming Restaurant implements Serializable
+            intent.putExtra("selectedRestaurant", restaurant);
             context.startActivity(intent);
         });
     }

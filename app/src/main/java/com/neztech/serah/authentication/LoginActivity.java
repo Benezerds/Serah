@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
 
         buttonLogin = findViewById(R.id.button_login);
 
-        signUpToggle = findViewById(R.id.text_view_signup);
+        signUpToggle = findViewById(R.id.text_view_loginpage_signup);
 
         forgotPass = findViewById(R.id.text_view_reviewposted);
 

@@ -1,8 +1,12 @@
 package com.neztech.serah.activity;
 
+import static androidx.fragment.app.FragmentManager.TAG;
+
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -22,6 +26,7 @@ import com.neztech.serah.interfaceutil.OnUserFetched;
 import com.neztech.serah.model.Restaurant;
 import com.neztech.serah.model.User;
 import com.neztech.serah.profile.ProfileActivity;
+import com.neztech.serah.restaurant.RestaurantDetailsActivity;
 import com.neztech.serah.utils.RestaurantUtils;
 import com.neztech.serah.utils.UserUtils;
 
@@ -39,8 +44,10 @@ public class MainMenuActivity extends AppCompatActivity implements MyRecyclerVie
     RecyclerView recyclerView;
 
     MyRecyclerViewAdapter adapter;
+    User currentUser;
 
 
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,19 +81,30 @@ public class MainMenuActivity extends AppCompatActivity implements MyRecyclerVie
         UserUtils.fetchCurrentUserDetails(new OnUserFetched() {
             @Override
             public void onFetched(User user) {
+                // Handle the fetched user object
+                // For example, update UI elements
                 userWelcomeText.setText("What do you crave, " + user.getFull_name() + "?");
+                currentUser = user;
+                Log.d(TAG, "User data: " + user.toString());
             }
 
             @Override
             public void onError(Exception e) {
                 // Handle the error here
+                Log.e(TAG, "Error fetching user details", e);
             }
         });
 
+
+
+        //  Image View
         profileIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Create an Intent to navigate to RestaurantDetailsActivity
                 Intent intent = new Intent(MainMenuActivity.this, ProfileActivity.class);
+                // Pass the clicked restaurant data using serialization
+                intent.putExtra("passUser", currentUser);
                 startActivity(intent);
             }
         });
@@ -113,8 +131,6 @@ public class MainMenuActivity extends AppCompatActivity implements MyRecyclerVie
             poppingRecyclerView.setAdapter(adapter);
         });
     }
-
-
 
 
 }

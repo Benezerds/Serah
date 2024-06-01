@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,20 +20,43 @@ import com.neztech.serah.R;
 import com.neztech.serah.activity.MainActivity;
 import com.neztech.serah.activity.MainMenuActivity;
 import com.neztech.serah.authentication.LoginActivity;
+import com.neztech.serah.model.Restaurant;
+import com.neztech.serah.model.User;
 import com.neztech.serah.utils.FirebasePersonalUtils;
+
+import java.io.Serializable;
 
 public class ProfileActivity extends AppCompatActivity {
     ImageView backArrow;
     MaterialButton logoutButton;
+
+    ImageView profileImage;
+    TextView fullName;
+    TextView email;
+    TextView phoneNumber;
+    User currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        //  Variable instantiation
-        backArrow = findViewById(R.id.backArrow);
-        logoutButton = findViewById(R.id.button_logout);
+        //  Initialize variable data
+        variableInitiation();
+
+
+        if (getIntent().getExtras() != null) {
+            currentUser = (User) getIntent().getSerializableExtra("passUser");
+
+            if (currentUser != null) {
+                //  Set Variables based on the serialized user data
+                setVariables();
+            }
+        }
+
+
+
+
 
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,5 +76,22 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+
+    public void variableInitiation() {
+        //  Variable instantiation
+        backArrow = findViewById(R.id.backArrow);
+        logoutButton = findViewById(R.id.button_logout);
+        profileImage = findViewById(R.id.profileImage);
+        fullName = findViewById(R.id.text_view_fullName);
+        email = findViewById(R.id.text_view_email);
+        phoneNumber = findViewById(R.id.text_view_phoneNumber);
+    }
+
+    public void setVariables() {
+        fullName.setText(currentUser.getFull_name());
+        email.setText(currentUser.getEmail());
+        phoneNumber.setText(currentUser.getPhoneNumber());
     }
 }

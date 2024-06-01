@@ -23,6 +23,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.GeoPoint;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,7 +37,7 @@ public class FirebasePersonalUtils {
         this.activity = activity;
     }
 
-    public Task<Boolean> createAccountWithEmail(String email, String password, String fullName, String phoneNumber){
+    public Task<Boolean> createAccountWithEmail(String email, String password, String fullName, String phoneNumber) {
         // Initialize Firebase Auth
         Log.d(TAG, "Intiaiting creating account with Email");
         mAuth = FirebaseAuth.getInstance();
@@ -58,12 +60,18 @@ public class FirebasePersonalUtils {
                             // Get an instance of Firestore
                             FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+                            //  Timestamp now
+                            Date currentDate = new Date();
+
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("EEE dd MM yyyy HH:mm");
+                            String formattedDate = dateFormat.format(currentDate);
+
                             // Create a new user with a first and last name
                             Map<String, Object> userMap = new HashMap<>();
                             userMap.put("email", email);
                             userMap.put("full_name", fullName);
                             userMap.put("phoneNumber", phoneNumber);
-                            userMap.put("created_time", Timestamp.now());
+                            userMap.put("created_time", formattedDate);
                             userMap.put("location", location);
                             userMap.put("username", fullName);
 
@@ -121,7 +129,7 @@ public class FirebasePersonalUtils {
 
     //  RESET ACCOUNT WITH EMAIL
     @NonNull
-    public static Task<Void> resetPassword(String email){
+    public static Task<Void> resetPassword(String email) {
         FirebaseAuth auth = FirebaseAuth.getInstance();
 
         return auth.sendPasswordResetEmail(email)
@@ -137,7 +145,7 @@ public class FirebasePersonalUtils {
 
     //  LOGIN WITH EMAIL
     @NonNull
-    public static Task<Boolean> loginWithEmail(String email, String password){
+    public static Task<Boolean> loginWithEmail(String email, String password) {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         TaskCompletionSource<Boolean> taskCompletionSource = new TaskCompletionSource<>();
 
@@ -157,13 +165,12 @@ public class FirebasePersonalUtils {
     }
 
 
-
-    public static boolean checkCurrentUser(FirebaseAuth mAuth){
+    public static boolean checkCurrentUser(FirebaseAuth mAuth) {
         // Check if user is signed in (non-null) and update UI accordingly.
         boolean result;
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
+        if (currentUser != null) {
             result = true;
         } else {
             result = false;
