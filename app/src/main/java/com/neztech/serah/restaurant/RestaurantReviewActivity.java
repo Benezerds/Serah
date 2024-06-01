@@ -17,6 +17,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.firebase.firestore.QuerySnapshot;
 import com.neztech.serah.R;
 import com.neztech.serah.model.Restaurant;
 import com.neztech.serah.model.Review;
@@ -58,20 +59,13 @@ public class RestaurantReviewActivity extends AppCompatActivity {
         }
 
 
-        RestaurantUtils.fetchRestaurantReviews(restaurant.getRestaurantId())
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        // Task completed successfully
-                        reviews = task.getResult();
-                        // Now you can use the reviews data
-                    } else {
-                        // Handle the error (e.g., log or display an error message)
-                        Log.d(TAG, "Error fetching restaurant reviews", task.getException());
-                    }
-                });
+        Log.d(TAG, "Running All Reviews");
+        reviews = RestaurantUtils.getAllReviewsByReference(restaurant.getDocumentReference(), restaurant);
+
+
+
+
     }
-
-
 
 
     public void variableInitiation() {
@@ -90,4 +84,6 @@ public class RestaurantReviewActivity extends AppCompatActivity {
         percentage2 = findViewById(R.id.text_view_rating_percentage2);
         percentage1 = findViewById(R.id.text_view_rating_percentage1);
     }
+
+
 }

@@ -27,6 +27,10 @@ public class Review implements Serializable {
         this.user = user;
     }
 
+    public Review() {
+
+    }
+
     public String getReviewId() {
         return ReviewId;
     }
@@ -78,11 +82,12 @@ public class Review implements Serializable {
     @Override
     public String toString() {
         return "Review{" +
-                "ReviewId='" + ReviewId + '\'' +
+                "restaurant=" + restaurant.toString() +
+                ", ReviewId='" + ReviewId + '\'' +
                 ", comment='" + comment + '\'' +
-                ", date=" + date +
+                ", date='" + date + '\'' +
                 ", rating=" + rating +
-                ", user=" + user +
+                ", user=" + user.toString() +
                 '}';
     }
 }

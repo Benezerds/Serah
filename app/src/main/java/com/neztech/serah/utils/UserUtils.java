@@ -2,15 +2,14 @@ package com.neztech.serah.utils;
 
 import android.util.Log;
 
-import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.Tasks;
-import com.google.firebase.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.neztech.serah.interfaceutil.OnUserFetched;
 import com.neztech.serah.model.User;
+
+import java.util.concurrent.CountDownLatch;
 
 public class UserUtils {
 
@@ -40,27 +39,33 @@ public class UserUtils {
     }
 
 
+    public static User fetchUserDataByReference(DocumentReference userRef) {
+        CountDownLatch latch = new CountDownLatch(1);
+        final User[] user = {null};
 
-    public static Task<User> fetchUsersDataByReference (DocumentReference userRef){
-            // Fetch the user data from Firestore
-            return userRef.get().continueWith(task -> {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot doc = task.getResult();
-                    if (doc.exists()) {
-                        // DocumentSnapshot contains the user data
-                        User user = doc.toObject(User.class);
-                        return user;
-                    } else {
-                        Log.d(TAG, "Document does not exist");
-                        return null;
-                    }
+        userRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                if (document.exists()) {
+                    user[0] = document.toObject(User.class);
                 } else {
-                    // Handle the error (e.g., network issues)
-                    Log.e(TAG, "Error fetching user data", task.getException());
-                    return null;
+                    System.out.println("No such document!");
                 }
-            });
+            } else {
+                System.err.println("Error fetching document: " + task.getException());
+            }
+            latch.countDown();
+        });
+
+        try {
+            latch.await();  // Wait for the asynchronous task to complete
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
-
+        return user[0];
     }
+
+
+
+}

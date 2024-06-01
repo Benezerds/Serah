@@ -2,6 +2,7 @@ package com.neztech.serah.utils;
 
 import static android.content.ContentValues.TAG;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 
 import com.google.android.gms.tasks.Task;
@@ -9,6 +10,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.neztech.serah.model.Restaurant;
 import com.neztech.serah.model.Review;
@@ -84,33 +86,54 @@ public class RestaurantUtils {
     }
 
 
-    public static Task<List<Review>> fetchRestaurantReviews(String restaurantId) {
+    public static List<Review> getAllReviewsByReference(DocumentReference restaurantId, Restaurant restoData) {
+        List<Review> reviews = new ArrayList<>();
+
+        // Get the Firestore instance
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        CollectionReference reviewsRef = db.collection("Review");
 
-        // Query reviews for the specified restaurant
-        return reviewsRef.whereEqualTo("RestaurantId", restaurantId).get()
-                .continueWith(task -> {
-                    if (task.isSuccessful()) {
-                        // Convert QuerySnapshot to a list of Review objects
-                        List<Review> reviews = new ArrayList<>();
-                        for (DocumentSnapshot doc : task.getResult()) {
+        // Assuming you have a "reviews" collection in Firestore
+        CollectionReference reviewsCollection = db.collection("Review");
 
-                            // Fetch user data for this review
-                            DocumentReference createdByRef = doc.getDocumentReference("uid");
+        // Query reviews where the "RestaurantId" field matches the provided reference
+        Query query = reviewsCollection.whereEqualTo("RestaurantId", restaurantId);
 
-                            User user = UserUtils.fetchUsersDataByReference(createdByRef).getResult(); // Assuming you have a fetchUserDataByUid function
-                            Review review = doc.toObject(Review.class);
-                            review.setUser(user);
-                            reviews.add(review);
+        query.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    // Convert each document to a Review object (you'll need to define the Review class)
+                    Review review = document.toObject(Review.class);
+                    review.setRestaurant(restoData);
+
+                    // Retrieve the user's UID reference field from the review document
+                    DocumentReference userUidRef = document.getDocumentReference("uid");
+
+                    // Get the user document based on the UID reference
+                    userUidRef.get().addOnCompleteListener(userTask -> {
+                        if (userTask.isSuccessful()) {
+                            DocumentSnapshot userDoc = userTask.getResult();
+                            if (userDoc.exists()) {
+                                // Convert the user document to a User object (you'll need to define the User class)
+                                User user = userDoc.toObject(User.class);
+                                review.setUser(user); // Set the User object inside the Review
+                                Log.d(TAG, "User added to review: " + user.toString());
+                            } else {
+                                Log.e(TAG, "User document not found for UID: " + userUidRef.getId());
+                            }
+                        } else {
+                            Log.e(TAG, "Error getting user document: ", userTask.getException());
                         }
-                        return reviews;
-                    } else {
-                        // Handle the error (e.g., no reviews found)
-                        return null;
-                    }
-                });
+                    });
+                    reviews.add(review);
+                }
+            } else {
+                Log.e(TAG, "Error getting reviews: ", task.getException());
+            }
+        });
+
+        return reviews;
     }
+
 
     public static void createReservationDocument(String reservationId, Restaurant restaurant, String partySize, String reservationDate, String reservationStatus, User user) {
         // Reference to your Firestore collection for reservations
