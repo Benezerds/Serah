@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("com.google.gms.google-services")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 android {
@@ -16,6 +17,11 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
 
     buildTypes {
         release {
@@ -54,4 +60,27 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.2.1")
 
     implementation("com.squareup.picasso:picasso:2.71828")
+    implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
+    implementation("com.google.android.libraries.places:places:3.5.0")
+}
+
+buildscript {
+    dependencies {
+        classpath("com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin:2.0.1")
+    }
+}
+
+secrets {
+    // Optionally specify a different file name containing your secrets.
+    // The plugin defaults to "local.properties"
+    propertiesFileName = "secrets.properties"
+
+    // A properties file containing default secret values. This file can be
+    // checked in version control.
+    defaultPropertiesFileName = "local.defaults.properties"
+
+    // Configure which keys should be ignored by the plugin by providing regular expressions.
+    // "sdk.dir" is ignored by default.
+    ignoreList.add("keyToIgnore") // Ignore the key "keyToIgnore"
+    ignoreList.add("sdk.*")       // Ignore all keys matching the regexp "sdk.*"
 }
