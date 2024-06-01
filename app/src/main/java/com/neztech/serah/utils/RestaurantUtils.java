@@ -10,13 +10,16 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.neztech.serah.model.Reservation;
 import com.neztech.serah.model.Restaurant;
 import com.neztech.serah.model.Review;
 import com.neztech.serah.model.User;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RestaurantUtils {
     public static List<Restaurant> getRestaurants() {
@@ -111,6 +114,30 @@ public class RestaurantUtils {
                 });
     }
 
-    
+    public static void createReservationDocument(String reservationId, Restaurant restaurant, String partySize, String reservationDate, String reservationStatus, User user) {
+        // Reference to your Firestore collection for reservations
+        CollectionReference reservationsRef = FirebaseFirestore.getInstance().collection("reservations");
+
+        // Create a new reservation document
+        DocumentReference newReservationRef = reservationsRef.document(reservationId);
+
+        // Create a map to store reservation data
+        Map<String, Object> reservationData = new HashMap<>();
+        reservationData.put("restaurantRef", "/Reservation/" + restaurant.getRestaurantId()); // Assuming you have a method to get the restaurant reference
+        reservationData.put("partySize", partySize);
+        reservationData.put("reservationDate", reservationDate);
+        reservationData.put("reservationStatus", reservationStatus);
+        reservationData.put("userRef", "/User/" + user.getUid()); // Assuming you have a method to get the user reference
+
+        // Set the fields for the reservation document
+        newReservationRef.set(reservationData)
+                .addOnSuccessListener(aVoid -> {
+                    // Reservation created successfully
+                    // Handle any additional logic here
+                })
+                .addOnFailureListener(e -> {
+                    // Handle reservation creation failure
+                });
+    }
 
 }

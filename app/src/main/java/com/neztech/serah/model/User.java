@@ -3,6 +3,7 @@ package com.neztech.serah.model;
 import java.io.Serializable;
 
 public class User implements Serializable {
+    private String uid;
     private String username;
     private String phoneNumber;
     private String location;
@@ -14,13 +15,22 @@ public class User implements Serializable {
 
     }
 
-    public User(String username, String phoneNumber, String location, String full_name, String email, String created_time) {
+    public User(String uid, String username, String phoneNumber, String location, String full_name, String email, String created_time) {
+        this.uid = uid;
         this.username = username;
         this.phoneNumber = phoneNumber;
         this.location = location;
         this.full_name = full_name;
         this.email = email;
         this.created_time = created_time;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public String getUsername() {
