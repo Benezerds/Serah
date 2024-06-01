@@ -5,17 +5,17 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".authentication.SuccessForgotPasswordActivity"
     android:paddingLeft="20dp"
-    android:paddingRight="20dp">
+    android:paddingRight="20dp"
+    tools:context=".authentication.ForgotPasswordActivity">
 
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/image_view_reviewposted"
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
         android:layout_marginTop="60dp"
-        android:src="@drawable/success_forgot"
+        android:src="@drawable/img_reviewposted_foreground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,40 +24,25 @@
         android:id="@+id/text_view_reviewposted"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="@font/epilogue_bold"
-        android:text="Password Reset E-mail Sent!"
-        android:textAlignment="center"
+        android:text="Review Posted!"
         android:textColor="#000000"
-        android:textSize="24sp"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="@+id/image_view_reviewposted"
         app:layout_constraintStart_toStartOf="@+id/image_view_reviewposted"
         app:layout_constraintTop_toBottomOf="@+id/image_view_reviewposted" />
 
     <TextView
-        android:id="@+id/text_view_forgotpass_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:text="@string/review_posted"
         android:textAlignment="center"
-        android:fontFamily="@font/plusjakartasans_regular"
-        android:text="A link has been send to your e-mail address. Click the link sent to be redirected into the reset password page to change your password."
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/text_view_reviewposted"
-        app:layout_constraintStart_toStartOf="@+id/text_view_reviewposted"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_view_reviewposted" />
 
-    <com.google.android.material.button.MaterialButton
-        android:layout_width="180dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:backgroundTint="@color/primary"
-        android:fontFamily="@font/epilogue_regular"
-        android:text="Back to Login"
-        android:textColor="@color/secondary"
-        android:layout_marginTop="72dp"
-        app:layout_constraintEnd_toEndOf="@+id/text_view_forgotpass_desc"
-        app:layout_constraintStart_toStartOf="@+id/text_view_forgotpass_desc"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_forgotpass_desc" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

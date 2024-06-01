@@ -3,9 +3,7 @@ package com.neztech.serah.authentication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +14,6 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.neztech.serah.R;
 import com.neztech.serah.activity.MainMenuActivity;
@@ -52,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
 
         signUpToggle = findViewById(R.id.text_view_signup);
 
-        forgotPass = findViewById(R.id.text_view_forgotpass);
+        forgotPass = findViewById(R.id.text_view_reviewposted);
 
         CustomAnimation.cardViewClickAnimation(LoginActivity.this, googleCardView);
         CustomAnimation.cardViewClickAnimation(LoginActivity.this, facebookCardView);

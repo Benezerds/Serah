@@ -18,5 +18,8 @@
     <string name="terms_conditions">Terms &amp; Conditions</string>
     <string name="privacy_policy">Privacy Policy</string>
 
+    <!-- Review -->
+    <string name="review_posted">We appreciate your review, as it will very much help the restaurant to get better reputation. We hope you’ll have another splendid dining experience!</string>
+
 
 </resources>
