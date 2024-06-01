@@ -53,7 +53,10 @@ public class RestaurantConfirmReserveActivity extends AppCompatActivity {
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(RestaurantConfirmReserveActivity.this, RestaurantReviewPostedActivity.class);
+                Intent intent = new Intent(RestaurantConfirmReserveActivity.this, RestaurantRatingActivity.class);
+                intent.putExtra("restodata", restoData);
+                intent.putExtra("reservationdata", reservationData);
+                intent.putExtra("userdata", userData);
                 RestaurantConfirmReserveActivity.this.startActivity(intent);
             }
         });

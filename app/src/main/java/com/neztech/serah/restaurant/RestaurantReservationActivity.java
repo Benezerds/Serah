@@ -67,15 +67,21 @@ public class RestaurantReservationActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Create an Intent to navigate to RestaurantDetailsActivity
-                createReservation();
+                createReservation(new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        Intent intent = new Intent(RestaurantReservationActivity.this, RestaurantConfirmReserveActivity.class);
+                        intent.putExtra("restodata", restoData);
+                        intent.putExtra("reservationdata", reservationData);
+                        intent.putExtra("userdata", currentUser);
+                        startActivity(intent);
+                    }
 
-                Intent intent = new Intent(RestaurantReservationActivity.this, RestaurantConfirmReserveActivity.class);
-                // Pass the clicked restaurant data using serialization
-                intent.putExtra("restodata", restoData);
-                intent.putExtra("reservationdata", reservationData);
-                intent.putExtra("userdata", currentUser);
-                RestaurantReservationActivity.this.startActivity(intent);
+                    @Override
+                    public void onFailure() {
+                        // Handle reservation creation failure
+                    }
+                });
             }
         });
     }
@@ -121,7 +127,7 @@ public class RestaurantReservationActivity extends AppCompatActivity {
         datePickerDialog.show();
     }
 
-    public void createReservation() {
+    public void createReservation(Callback callback) {
         int length = 15;
 
         // Generate a random byte array
@@ -133,7 +139,6 @@ public class RestaurantReservationActivity extends AppCompatActivity {
 
         String partySize = pax.getText().toString();
 
-
         UserUtils.fetchCurrentUserDetails(new OnUserFetched() {
             @SuppressLint("RestrictedApi")
             @Override
@@ -142,9 +147,14 @@ public class RestaurantReservationActivity extends AppCompatActivity {
                 currentUser = user;
                 Log.d(TAG, "User data: " + user.toString());
 
-                //  Todo: Redundancy, instead of individual arguments, just pass the reservation object to the arguments
+                // Create the reservation data object
                 reservationData = new Reservation(reservationId, restoData, partySize, dateAndTime.getText().toString(), "PENDING", currentUser);
+
+                // Create the reservation document
                 RestaurantUtils.createReservationDocument(reservationId, restoData, partySize, dateAndTime.getText().toString(), "PENDING", currentUser);
+
+                // Invoke the callback (you can pass the reservation data or any other relevant information)
+                callback.onSuccess();
             }
 
             @SuppressLint("RestrictedApi")
@@ -152,7 +162,16 @@ public class RestaurantReservationActivity extends AppCompatActivity {
             public void onError(Exception e) {
                 // Handle the error here
                 Log.e(TAG, "Error fetching user details", e);
+                callback.onFailure();
             }
         });
     }
+
+    // Callback interface
+    interface Callback {
+        void onSuccess();
+        void onFailure();
+    }
+
 }
+
