@@ -38,11 +38,14 @@
         android:layout_height="wrap_content">
 
         <ImageView
+            android:id="@+id/image_view_confirm"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:background="@color/button" />
+            android:background="@color/button"
+            android:scaleType="fitXY"/>
 
         <TextView
+            android:id="@+id/text_view_confirm_restoname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -116,6 +119,7 @@
                             android:textSize="@dimen/_14ssp" />
 
                         <TextView
+                            android:id="@+id/text_view_confirm_date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/epilogue_regular"
@@ -158,6 +162,7 @@
                             android:textSize="@dimen/_14ssp" />
 
                         <TextView
+                            android:id="@+id/text_view_confirm_partysize"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/epilogue_regular"
@@ -211,6 +216,7 @@
                             android:textSize="@dimen/_14ssp" />
 
                         <TextView
+                            android:id="@+id/text_view_confirm_username"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/epilogue_regular"
@@ -253,6 +259,7 @@
                             android:textSize="@dimen/_14ssp" />
 
                         <TextView
+                            android:id="@+id/text_view_confirm_phonenumber"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/epilogue_regular"
@@ -295,6 +302,7 @@
                             android:textSize="@dimen/_14ssp" />
 
                         <TextView
+                            android:id="@+id/text_view_confirm_email"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/epilogue_regular"

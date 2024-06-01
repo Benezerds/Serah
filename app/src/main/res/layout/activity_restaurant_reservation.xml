@@ -36,9 +36,11 @@
         android:layout_height="wrap_content">
 
         <ImageView
+            android:id="@+id/image_view_reserve"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:background="@color/button" />
+            android:background="@color/button"
+            android:scaleType="fitXY"/>
 
         <TextView
             android:id="@+id/text_view_reserve_restoname"

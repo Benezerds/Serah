@@ -25,10 +25,12 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.neztech.serah.R;
 import com.neztech.serah.interfaceutil.OnUserFetched;
+import com.neztech.serah.model.Reservation;
 import com.neztech.serah.model.Restaurant;
 import com.neztech.serah.model.User;
 import com.neztech.serah.utils.RestaurantUtils;
 import com.neztech.serah.utils.UserUtils;
+import com.squareup.picasso.Picasso;
 
 import java.security.SecureRandom;
 import java.util.Base64;
@@ -41,9 +43,11 @@ public class RestaurantReservationActivity extends AppCompatActivity {
     TextInputEditText pax;
     TextView dateAndTime;
     ImageView dateIcon;
+    ImageView restoImage;
     int hour, minute;
     String dateText;
     User currentUser;
+    Reservation reservationData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +61,7 @@ public class RestaurantReservationActivity extends AppCompatActivity {
         }
 
         variableInitiation();
-
+        setContent();
 
         //  Find a table button listener
         button.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +73,8 @@ public class RestaurantReservationActivity extends AppCompatActivity {
                 Intent intent = new Intent(RestaurantReservationActivity.this, RestaurantConfirmReserveActivity.class);
                 // Pass the clicked restaurant data using serialization
                 intent.putExtra("restodata", restoData);
+                intent.putExtra("reservationdata", reservationData);
+                intent.putExtra("userdata", currentUser);
                 RestaurantReservationActivity.this.startActivity(intent);
             }
         });
@@ -81,10 +87,14 @@ public class RestaurantReservationActivity extends AppCompatActivity {
         pax = findViewById(R.id.edit_text_reserve_pax);
         dateAndTime = findViewById(R.id.text_view_reserve_date);
         dateIcon = findViewById(R.id.image_view_dateicon);
+        restoImage = findViewById(R.id.image_view_reserve);
     }
 
     public void setContent() {
         restoName.setText(restoData.getRestoName());
+
+        String imageUrl = restoData.getRestoImageUrl();
+        Picasso.get().load(imageUrl).into(restoImage);
     }
 
     private void showTimePicker(int year, int month, int day) {
@@ -100,7 +110,6 @@ public class RestaurantReservationActivity extends AppCompatActivity {
         timePickerDialog.setTitle("Select Time");
         timePickerDialog.show();
     }
-
 
     public void popDateTimePicker(View view) {
         // Show the date picker
@@ -133,6 +142,8 @@ public class RestaurantReservationActivity extends AppCompatActivity {
                 currentUser = user;
                 Log.d(TAG, "User data: " + user.toString());
 
+                //  Todo: Redundancy, instead of individual arguments, just pass the reservation object to the arguments
+                reservationData = new Reservation(reservationId, restoData, partySize, dateAndTime.getText().toString(), "PENDING", currentUser);
                 RestaurantUtils.createReservationDocument(reservationId, restoData, partySize, dateAndTime.getText().toString(), "PENDING", currentUser);
             }
 

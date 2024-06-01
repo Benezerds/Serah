@@ -1,9 +1,11 @@
 package com.neztech.serah.restaurant;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +15,7 @@ import com.neztech.serah.R;
 import com.neztech.serah.model.Restaurant;
 import com.neztech.serah.model.Review;
 import com.neztech.serah.utils.RestaurantUtils;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -22,6 +25,7 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
     TextView restoTables;
     TextView restoLocation;
     TextView description;
+    ImageView restoImage;
 
     Restaurant restaurant;
     Button reservationButton;
@@ -51,6 +55,9 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
         restoLocation.setText(location);
         description.setText(restaurant.getDescription());
 
+        //  Set Image
+        String imageUrl = restaurant.getRestoImageUrl();
+        Picasso.get().load(imageUrl).into(restoImage);
 
         //  OnClick Listeners
         cardViewRating.setOnClickListener(new View.OnClickListener() {
@@ -85,6 +92,7 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
         restoTables = findViewById(R.id.text_view_restodetails_tables);
         restoLocation = findViewById(R.id.text_view_restodetails_location);
         description = findViewById(R.id.text_view_restodetails_description);
+        restoImage = findViewById(R.id.image_view_restodetailsimg);
 
 
         //  Card View & Button
