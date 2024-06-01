@@ -1,6 +1,9 @@
 package com.neztech.serah.model;
 
 
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.io.Serializable;
 
 public class Restaurant implements Serializable {
@@ -111,6 +114,12 @@ public class Restaurant implements Serializable {
 
     public void setTables(int tables) {
         this.tables = tables;
+    }
+
+    public DocumentReference getDocumentReference() {
+        // Construct the reference path
+        String restaurantPath = "/Restaurant/" + getRestaurantId();
+        return FirebaseFirestore.getInstance().document(restaurantPath);
     }
 
     @Override

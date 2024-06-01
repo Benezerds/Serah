@@ -124,11 +124,11 @@ public class RestaurantUtils {
         // Create a map to store reservation data
         Map<String, Object> reservationData = new HashMap<>();
         reservationData.put("ReservationId", reservationId);
-        reservationData.put("RestaurantId", "/Reservation/" + restaurant.getRestaurantId()); // Assuming you have a method to get the restaurant reference
+        reservationData.put("RestaurantId", restaurant.getDocumentReference()); // Assuming you have a method to get the restaurant reference
         reservationData.put("partySize", partySize);
         reservationData.put("reservationDate", reservationDate);
         reservationData.put("reservationStatus", reservationStatus);
-        reservationData.put("uid", "/User/" + user.getUid()); // Assuming you have a method to get the user reference
+        reservationData.put("uid", user.getDocumentReference()); // Assuming you have a method to get the user reference
 
         // Set the fields for the reservation document
         newReservationRef.set(reservationData)

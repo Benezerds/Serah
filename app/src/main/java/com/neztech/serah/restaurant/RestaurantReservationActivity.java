@@ -1,9 +1,13 @@
 package com.neztech.serah.restaurant;
 
+import static androidx.fragment.app.FragmentManager.TAG;
+
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -20,8 +24,14 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.neztech.serah.R;
+import com.neztech.serah.interfaceutil.OnUserFetched;
 import com.neztech.serah.model.Restaurant;
+import com.neztech.serah.model.User;
+import com.neztech.serah.utils.RestaurantUtils;
+import com.neztech.serah.utils.UserUtils;
 
+import java.security.SecureRandom;
+import java.util.Base64;
 import java.util.Locale;
 
 public class RestaurantReservationActivity extends AppCompatActivity {
@@ -33,7 +43,7 @@ public class RestaurantReservationActivity extends AppCompatActivity {
     ImageView dateIcon;
     int hour, minute;
     String dateText;
-
+    User currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +59,13 @@ public class RestaurantReservationActivity extends AppCompatActivity {
         variableInitiation();
 
 
-
         //  Find a table button listener
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Create an Intent to navigate to RestaurantDetailsActivity
+                createReservation();
+
                 Intent intent = new Intent(RestaurantReservationActivity.this, RestaurantConfirmReserveActivity.class);
                 // Pass the clicked restaurant data using serialization
                 intent.putExtra("restodata", restoData);
@@ -99,5 +110,38 @@ public class RestaurantReservationActivity extends AppCompatActivity {
         }, 2024, 5, 2); // Initial date (you can adjust this)
 
         datePickerDialog.show();
+    }
+
+    public void createReservation() {
+        int length = 15;
+
+        // Generate a random byte array
+        byte[] randomBytes = new byte[length];
+        new SecureRandom().nextBytes(randomBytes);
+
+        // Encode the byte array to a base64 string
+        String reservationId = Base64.getUrlEncoder().withoutPadding().encodeToString(randomBytes);
+
+        String partySize = pax.getText().toString();
+
+
+        UserUtils.fetchCurrentUserDetails(new OnUserFetched() {
+            @SuppressLint("RestrictedApi")
+            @Override
+            public void onFetched(User user) {
+                // Handle the fetched user object
+                currentUser = user;
+                Log.d(TAG, "User data: " + user.toString());
+
+                RestaurantUtils.createReservationDocument(reservationId, restoData, partySize, dateAndTime.getText().toString(), "PENDING", currentUser);
+            }
+
+            @SuppressLint("RestrictedApi")
+            @Override
+            public void onError(Exception e) {
+                // Handle the error here
+                Log.e(TAG, "Error fetching user details", e);
+            }
+        });
     }
 }

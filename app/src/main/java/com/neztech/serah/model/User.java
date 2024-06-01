@@ -1,5 +1,8 @@
 package com.neztech.serah.model;
 
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.io.Serializable;
 
 public class User implements Serializable {
@@ -79,6 +82,12 @@ public class User implements Serializable {
 
     public void setCreated_time(String created_time) {
         this.created_time = created_time;
+    }
+
+    public DocumentReference getDocumentReference() {
+        // Construct the reference path
+        String restaurantPath = "/User/" + getUid();
+        return FirebaseFirestore.getInstance().document(restaurantPath);
     }
 
     @Override
