@@ -1,18 +1,25 @@
 package com.neztech.serah.model;
 
-import com.google.firebase.Timestamp;
-
 import java.io.Serializable;
-import java.util.Date;
 
 public class Review implements Serializable {
+    Restaurant restaurant;
     String ReviewId;
     String comment;
-    Date date;
+    String date;
     int rating;
     User user;
 
-    public Review(String reviewId, String comment, Date date, int rating, User user) {
+    public Review(Restaurant restaurant, String reviewId, String comment, String date, int rating, User user) {
+        this.restaurant = restaurant;
+        ReviewId = reviewId;
+        this.comment = comment;
+        this.date = date;
+        this.rating = rating;
+        this.user = user;
+    }
+
+    public Review(String reviewId, String comment, String date, int rating, User user) {
         ReviewId = reviewId;
         this.comment = comment;
         this.date = date;
@@ -36,11 +43,11 @@ public class Review implements Serializable {
         this.comment = comment;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -58,6 +65,14 @@ public class Review implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 
     @Override

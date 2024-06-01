@@ -122,6 +122,8 @@ public class Restaurant implements Serializable {
         return FirebaseFirestore.getInstance().document(restaurantPath);
     }
 
+
+
     @Override
     public String toString() {
         return "Restaurant{" +

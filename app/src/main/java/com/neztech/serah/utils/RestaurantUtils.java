@@ -10,13 +10,11 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.neztech.serah.model.Reservation;
 import com.neztech.serah.model.Restaurant;
 import com.neztech.serah.model.Review;
 import com.neztech.serah.model.User;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -140,5 +138,33 @@ public class RestaurantUtils {
                     // Handle reservation creation failure
                 });
     }
+
+    public static void createReviewDocument(Review review) {
+        // Reference to your Firestore collection for reviews
+        CollectionReference reviewsRef = FirebaseFirestore.getInstance().collection("Review");
+
+        // Create a new review document
+        DocumentReference newReviewRef = reviewsRef.document(review.getReviewId());
+
+        // Create a map to store review data
+        Map<String, Object> reviewData = new HashMap<>();
+        reviewData.put("ReviewId", review.getReviewId());
+        reviewData.put("RestaurantId", review.getRestaurant().getDocumentReference());
+        reviewData.put("rating", review.getRating());
+        reviewData.put("date", review.getDate());
+        reviewData.put("uid", review.getUser().getDocumentReference());
+        reviewData.put("comment", review.getComment());
+
+        // Set the fields for the review document
+        newReviewRef.set(reviewData)
+                .addOnSuccessListener(aVoid -> {
+                    // Review created successfully
+                    // Handle any additional logic here
+                })
+                .addOnFailureListener(e -> {
+                    // Handle review creation failure
+                });
+    }
+
 
 }
