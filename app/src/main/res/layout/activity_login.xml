@@ -50,18 +50,30 @@
             android:minHeight="48dp"
             android:textColorHint="#BDBDBD" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/text_field_password"
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:backgroundTint="#F3F2F2"
-            android:drawableStart="@drawable/mail_outline"
-            android:drawablePadding="8dp"
-            android:fontFamily="@font/epilogue_light"
-            android:hint="@string/password"
-            android:minHeight="48dp"
-            android:textColorHint="#BDBDBD" />
+            app:boxStrokeWidth="0dp"
+            app:passwordToggleEnabled="true">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/text_field_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:backgroundTint="#F3F2F2"
+                android:drawableStart="@drawable/password_outline"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/epilogue_light"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+
+                android:minHeight="48dp"
+                android:textColorHint="#BDBDBD" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/text_view_reviewposted"
@@ -97,8 +109,7 @@
             android:id="@+id/card_view_google"
             layout="@layout/google_login_botton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content" />
 
 
         <com.google.android.material.card.MaterialCardView
