@@ -140,8 +140,9 @@ public class RestaurantReviewActivity extends AppCompatActivity {
 
         double averageRating = (double) totalRatingSum / numberOfReviews;
 
-        return String.valueOf(averageRating);
+        return String.format("%.1f", averageRating);
     }
+
 
     public double getTotalRatingAsDouble() {
         int totalRatingSum = 0;
