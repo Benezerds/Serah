@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -63,6 +64,7 @@ public class MainMenuActivity extends Activity implements LocationListener {
     double latitude;
     double longitude;
     LocationManager locationManager;
+    CardView cardViewSpin;
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 
@@ -75,6 +77,7 @@ public class MainMenuActivity extends Activity implements LocationListener {
         mAuth = FirebaseAuth.getInstance();
         profileIcon = findViewById(R.id.image_view_profile);
         userWelcomeText = findViewById(R.id.text_view_user_welcome);
+        cardViewSpin = findViewById(R.id.card_view_serah);
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -162,6 +165,14 @@ public class MainMenuActivity extends Activity implements LocationListener {
                 // Pass the clicked restaurant data using serialization
                 intent.putExtra("passUser", currentUser);
                 startActivity(intent);
+            }
+        });
+
+        cardViewSpin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               Intent intent = new Intent(MainMenuActivity.this, WheelOfFoodActivity.class);
+               MainMenuActivity.this.startActivity(intent);
             }
         });
     }

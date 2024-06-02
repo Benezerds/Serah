@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/view2"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
+            android:elevation="12dp"
+            app:cardCornerRadius="8dp">
+
+            <ImageView
+                android:id="@+id/image_view_history_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@drawable/profile_avatar" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- Name and Date Section -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/text_view_history_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/epilogue_bold"
+                    android:text="Upcoming "
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/text_view_review_pax"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/epilogue_bold"
+                    android:text="- 2 Pax"
+                    android:textColor="#000000" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/text_view_history_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/epilogue_light"
+                android:text="July 8, 2024"
+                android:textColor="#9C594A" />
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/text_view_history_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/epilogue_bold"
+            android:layout_gravity="center_vertical"
+            android:text="16:00"
+            android:textColor="#000000" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/text_view_history_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/epilogue_regular"
+        android:lineSpacingExtra="@dimen/_4ssp"
+        android:layout_marginTop="6dp"
+        android:text="Wingstop - Fx Sudirman"
+        android:textColor="#000000"
+        android:textSize="16dp" />
+
+
+</LinearLayout>

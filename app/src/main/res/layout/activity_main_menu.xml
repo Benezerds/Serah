@@ -81,6 +81,29 @@
                 android:textSize="@dimen/_12ssp" />
 
             <!-- Image Roulette Card Section To Be Inserted -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_view_serah"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:layout_width="132dp"
+                android:layout_height="132dp"
+                android:layout_gravity="center_horizontal"
+                app:cardCornerRadius="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/plusjakartasans_bold"
+                    android:text="Serah deh"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="12sp" />
+                
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/wheel_of_food" />
+            </androidx.cardview.widget.CardView>
 
             <!-- Featured resto section -->
             <LinearLayout
