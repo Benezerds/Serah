@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -35,6 +36,8 @@ public class ProfileActivity extends AppCompatActivity {
     TextView email;
     TextView phoneNumber;
     User currentUser;
+    LinearLayout reservationOption;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +79,15 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        reservationOption.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, ReservationHistoryActivity.class);
+                intent.putExtra("userData", currentUser);
+                ProfileActivity.this.startActivity(intent);
+            }
+        });
     }
 
 
@@ -87,6 +99,7 @@ public class ProfileActivity extends AppCompatActivity {
         fullName = findViewById(R.id.text_view_fullName);
         email = findViewById(R.id.text_view_email);
         phoneNumber = findViewById(R.id.text_view_phoneNumber);
+        reservationOption = findViewById(R.id.linear_layout_reservation);
     }
 
     public void setVariables() {

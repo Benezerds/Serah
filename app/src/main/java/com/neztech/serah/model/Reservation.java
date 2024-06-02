@@ -19,6 +19,9 @@ public class Reservation implements Serializable {
         this.user = user;
     }
 
+    public Reservation() {
+    }
+
     public String getReservationId() {
         return ReservationId;
     }
