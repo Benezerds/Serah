@@ -72,7 +72,7 @@ public class UserUtils {
                     reservation.setUser(userData);
 
                     // Retrieve the restaurant's ID reference field from the reservation document
-                    DocumentReference restaurantIdRef = document.getDocumentReference("restaurantId");
+                    DocumentReference restaurantIdRef = document.getDocumentReference("RestaurantId");
 
                     // Fetch restaurant document based on the ID reference
                     getRestaurantDocument(restaurantIdRef, reservation, reservations, callback, expectedReservationCount);
@@ -113,7 +113,6 @@ public class UserUtils {
             }
         });
     }
-
 
 
 }

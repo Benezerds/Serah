@@ -41,25 +41,24 @@ public class ReservationHistoryActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view_resto_reservatiion);
 
         if (getIntent().getExtras() != null) {
-            user = (User) getIntent().getSerializableExtra("passUser");
-
-
-            UserUtils.getAllReservationsByReference(user.getDocumentReference(), user, new UserUtils.ReservationsCallback() {
-                @SuppressLint("RestrictedApi")
-                @Override
-                public void onReservationsLoaded(List<Reservation> reservations) {
-                    reservationList = reservations;
-                    Log.d(FragmentManager.TAG, "All Reviews Fetched: " + reservationList.toString());
-
-                    //  Populate recycler view
-                    ReservationAdapter reservationAdapter = new ReservationAdapter(reservationList);
-                    recyclerView.setAdapter(reservationAdapter);
-
-                    LinearLayoutManager layoutManager = new LinearLayoutManager(ReservationHistoryActivity.this);
-                    recyclerView.setLayoutManager(layoutManager);
-
-                }
-            });
+            user = (User) getIntent().getSerializableExtra("userData");
         }
+
+        UserUtils.getAllReservationsByReference(user.getDocumentReference(), user, new UserUtils.ReservationsCallback() {
+            @SuppressLint("RestrictedApi")
+            @Override
+            public void onReservationsLoaded(List<Reservation> reservations) {
+                reservationList = reservations;
+                Log.d(FragmentManager.TAG, "All Reviews Fetched: " + reservationList.toString());
+
+                //  Populate recycler view
+                ReservationAdapter reservationAdapter = new ReservationAdapter(reservationList);
+                recyclerView.setAdapter(reservationAdapter);
+
+                LinearLayoutManager layoutManager = new LinearLayoutManager(ReservationHistoryActivity.this);
+                recyclerView.setLayoutManager(layoutManager);
+
+            }
+        });
     }
 }

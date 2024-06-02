@@ -34,7 +34,7 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
         Reservation reservation = reservationList.get(position);
         // TODO: Load image into holder.imageViewHistoryImage
         holder.textViewHistoryStatus.setText(reservation.getReservationStatus());
-        holder.textViewReviewPax.setText(reservation.getPartySize());
+        holder.textViewReviewPax.setText(" - " + reservation.getPartySize() + " Pax");
         holder.textViewHistoryDate.setText(reservation.getReservationDate());
         holder.textViewHistoryTime.setText(reservation.getReservationDate());
         holder.textViewHistoryLocation.setText(reservation.getRestaurant().getLocation());
