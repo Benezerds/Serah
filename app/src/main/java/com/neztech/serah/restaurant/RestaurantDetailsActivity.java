@@ -2,6 +2,7 @@ package com.neztech.serah.restaurant;
 
 import android.content.Intent;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -30,6 +31,7 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
     Restaurant restaurant;
     Button reservationButton;
     CardView cardViewRating;
+    CardView restoLocationCardView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +85,21 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
             }
         });
 
+        restoLocationCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Assuming that restaurant.getLocation() returns a string in the format "locationname,lat,lng"
+                String location = restaurant.getLocation();
+                String[] locationParts = location.split(",");
+                // Include the location name in the query parameter
+                String uri = "geo:" + locationParts[1] + "," + locationParts[2] + "?q=" + Uri.encode(locationParts[0]);
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                startActivity(intent);
+            }
+        });
+
+
+
     }
 
 
@@ -93,6 +110,7 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
         restoLocation = findViewById(R.id.text_view_restodetails_location);
         description = findViewById(R.id.text_view_restodetails_description);
         restoImage = findViewById(R.id.image_view_restodetailsimg);
+        restoLocationCardView = findViewById(R.id.resto_details_location);
 
 
         //  Card View & Button
