@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         PlacesClient placesClient = Places.createClient(this);
 
 
+
+
         mAuth = FirebaseAuth.getInstance();
         // Check if the user is logged in
         boolean loggedIn = FirebasePersonalUtils.checkCurrentUser(mAuth);

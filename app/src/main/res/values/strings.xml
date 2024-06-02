@@ -20,6 +20,9 @@
 
     <!-- Review -->
     <string name="review_posted">We appreciate your review, as it will very much help the restaurant to get better reputation. We hope you’ll have another splendid dining experience!</string>
+    <string name="title_location_permission">Request for location permission</string>
+    <string name="text_location_permission">We need your location to suggest nearby restaurant</string>
+    <string name="ok">Ok</string>
 
 
 </resources>
