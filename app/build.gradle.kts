@@ -79,6 +79,10 @@ dependencies {
     implementation("com.squareup.picasso:picasso:2.71828")
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.22"))
     implementation("com.google.android.libraries.places:places:3.5.0")
+
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+
 }
 
 
