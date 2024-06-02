@@ -135,24 +135,22 @@ public class MainMenuActivity extends Activity implements LocationListener {
         getPoppingRestoData();
 
         //  Fetch current logged in user data
-        UserUtils.fetchCurrentUserDetails(new
+        UserUtils.fetchCurrentUserDetails(new OnUserFetched() {
+          @Override
+          public void onFetched(User user) {
+              // Handle the fetched user object
+              // For example, update UI elements
+              userWelcomeText.setText("What do you crave, " + user.getFull_name() + "?");
+              currentUser = user;
+              Log.d(TAG, "User data: " + user.toString());
+          }
 
-                                                  OnUserFetched() {
-                                                      @Override
-                                                      public void onFetched(User user) {
-                                                          // Handle the fetched user object
-                                                          // For example, update UI elements
-                                                          userWelcomeText.setText("What do you crave, " + user.getFull_name() + "?");
-                                                          currentUser = user;
-                                                          Log.d(TAG, "User data: " + user.toString());
-                                                      }
-
-                                                      @Override
-                                                      public void onError(Exception e) {
-                                                          // Handle the error here
-                                                          Log.e(TAG, "Error fetching user details", e);
-                                                      }
-                                                  });
+          @Override
+          public void onError(Exception e) {
+              // Handle the error here
+              Log.e(TAG, "Error fetching user details", e);
+          }
+      });
 
 
         //  Image View
