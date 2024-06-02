@@ -3,6 +3,7 @@ package com.neztech.serah.model;
 import java.io.Serializable;
 
 public class Review implements Serializable {
+
     Restaurant restaurant;
     String ReviewId;
     String comment;

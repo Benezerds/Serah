@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CountDownLatch;
 
 public class RestaurantUtils {
     public static List<Restaurant> getRestaurants() {
@@ -86,53 +87,75 @@ public class RestaurantUtils {
     }
 
 
-    public static List<Review> getAllReviewsByReference(DocumentReference restaurantId, Restaurant restoData) {
+
+    public interface ReviewsCallback {
+        void onReviewsLoaded(List<Review> reviews);
+    }
+
+    public static void getAllReviewsByReference(
+            DocumentReference restaurantId,
+            Restaurant restoData,
+            ReviewsCallback callback) {
         List<Review> reviews = new ArrayList<>();
 
-        // Get the Firestore instance
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        // Assuming you have a "reviews" collection in Firestore
         CollectionReference reviewsCollection = db.collection("Review");
-
-        // Query reviews where the "RestaurantId" field matches the provided reference
         Query query = reviewsCollection.whereEqualTo("RestaurantId", restaurantId);
 
         query.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
+                int expectedReviewCount = task.getResult().size(); // Get the expected review count
                 for (QueryDocumentSnapshot document : task.getResult()) {
-                    // Convert each document to a Review object (you'll need to define the Review class)
                     Review review = document.toObject(Review.class);
                     review.setRestaurant(restoData);
 
                     // Retrieve the user's UID reference field from the review document
                     DocumentReference userUidRef = document.getDocumentReference("uid");
 
-                    // Get the user document based on the UID reference
-                    userUidRef.get().addOnCompleteListener(userTask -> {
-                        if (userTask.isSuccessful()) {
-                            DocumentSnapshot userDoc = userTask.getResult();
-                            if (userDoc.exists()) {
-                                // Convert the user document to a User object (you'll need to define the User class)
-                                User user = userDoc.toObject(User.class);
-                                review.setUser(user); // Set the User object inside the Review
-                                Log.d(TAG, "User added to review: " + user.toString());
-                            } else {
-                                Log.e(TAG, "User document not found for UID: " + userUidRef.getId());
-                            }
-                        } else {
-                            Log.e(TAG, "Error getting user document: ", userTask.getException());
-                        }
-                    });
-                    reviews.add(review);
+                    // Fetch user document based on the UID reference
+                    getUserDocument(userUidRef, review, reviews, callback, expectedReviewCount);
                 }
             } else {
                 Log.e(TAG, "Error getting reviews: ", task.getException());
             }
         });
-
-        return reviews;
     }
+
+    private static void getUserDocument(
+            DocumentReference userUidRef,
+            Review review,
+            List<Review> reviews,
+            ReviewsCallback callback,
+            int expectedReviewCount) {
+        userUidRef.get().addOnCompleteListener(userTask -> {
+            if (userTask.isSuccessful()) {
+                DocumentSnapshot userDoc = userTask.getResult();
+                if (userDoc.exists()) {
+                    User user = userDoc.toObject(User.class);
+                    review.setUser(user);
+                    Log.d(TAG, "User added to review: " + review.getUser().toString());
+                } else {
+                    Log.e(TAG, "User document not found for UID: " + userUidRef.getId());
+                }
+            } else {
+                Log.e(TAG, "Error getting user document: ", userTask.getException());
+            }
+
+            // Add the review to the list
+            reviews.add(review);
+
+            // Check if all reviews are processed
+            if (reviews.size() == expectedReviewCount) {
+                Log.d(TAG, "RETURNING LIST OF REVIEWS");
+                callback.onReviewsLoaded(reviews);
+            }
+        });
+    }
+
+
+
+
+
 
 
     public static void createReservationDocument(String reservationId, Restaurant restaurant, String partySize, String reservationDate, String reservationStatus, User user) {

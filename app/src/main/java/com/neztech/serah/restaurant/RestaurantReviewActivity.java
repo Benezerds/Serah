@@ -3,21 +3,17 @@ package com.neztech.serah.restaurant;
 import static androidx.fragment.app.FragmentManager.TAG;
 
 import android.annotation.SuppressLint;
-import android.content.ContentValues;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.google.firebase.firestore.QuerySnapshot;
 import com.neztech.serah.R;
 import com.neztech.serah.model.Restaurant;
 import com.neztech.serah.model.Review;
@@ -42,7 +38,8 @@ public class RestaurantReviewActivity extends AppCompatActivity {
     TextView percentage1;
 
     Restaurant restaurant;
-    List<Review> reviews;
+    List<Review> restoReviews;
+    ImageView forwardArrow;
 
 
     @SuppressLint("RestrictedApi")
@@ -60,8 +57,15 @@ public class RestaurantReviewActivity extends AppCompatActivity {
 
 
         Log.d(TAG, "Running All Reviews");
-        reviews = RestaurantUtils.getAllReviewsByReference(restaurant.getDocumentReference(), restaurant);
 
+
+        RestaurantUtils.getAllReviewsByReference(restaurant.getDocumentReference(), restaurant, new RestaurantUtils.ReviewsCallback() {
+            @Override
+            public void onReviewsLoaded(List<Review> reviews) {
+                restoReviews = reviews;
+                Log.d(TAG, "All Reviews Fetched: " + restoReviews.toString());
+            }
+        });
 
 
 
@@ -83,6 +87,7 @@ public class RestaurantReviewActivity extends AppCompatActivity {
         percentage3 = findViewById(R.id.text_view_rating_percentage3);
         percentage2 = findViewById(R.id.text_view_rating_percentage2);
         percentage1 = findViewById(R.id.text_view_rating_percentage1);
+        forwardArrow = findViewById(R.id.forwardArrow);
     }
 
 
