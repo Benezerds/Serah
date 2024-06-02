@@ -13,8 +13,11 @@ import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.neztech.serah.R;
+import com.neztech.serah.adapter.RestoReviewAdapter;
 import com.neztech.serah.model.Restaurant;
 import com.neztech.serah.model.Review;
 import com.neztech.serah.utils.RestaurantUtils;
@@ -40,6 +43,7 @@ public class RestaurantReviewActivity extends AppCompatActivity {
     Restaurant restaurant;
     List<Review> restoReviews;
     ImageView forwardArrow;
+    RecyclerView restoReviewsRecycler;
 
 
     @SuppressLint("RestrictedApi")
@@ -64,9 +68,14 @@ public class RestaurantReviewActivity extends AppCompatActivity {
             public void onReviewsLoaded(List<Review> reviews) {
                 restoReviews = reviews;
                 Log.d(TAG, "All Reviews Fetched: " + restoReviews.toString());
+
+                // Populate recycler view
+                RestoReviewAdapter reviewAdapter = new RestoReviewAdapter(RestaurantReviewActivity.this, restoReviews);
+                restoReviewsRecycler.setAdapter(reviewAdapter);
+                LinearLayoutManager layoutManager = new LinearLayoutManager(RestaurantReviewActivity.this);
+                restoReviewsRecycler.setLayoutManager(layoutManager);
             }
         });
-
 
 
     }
@@ -88,7 +97,10 @@ public class RestaurantReviewActivity extends AppCompatActivity {
         percentage2 = findViewById(R.id.text_view_rating_percentage2);
         percentage1 = findViewById(R.id.text_view_rating_percentage1);
         forwardArrow = findViewById(R.id.forwardArrow);
+        restoReviewsRecycler = findViewById(R.id.recycler_view_resto_reviews);
     }
 
+    public void setContent() {
 
+    }
 }
