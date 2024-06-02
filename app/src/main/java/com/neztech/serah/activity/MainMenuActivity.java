@@ -33,6 +33,8 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.neztech.serah.API.GeocodeApi;
+import com.neztech.serah.API.response.GeocodeResponse;
 import com.neztech.serah.R;
 import com.neztech.serah.adapter.MyRecyclerViewAdapter;
 import com.neztech.serah.adapter.PoppingRestoRecyclerViewAdapter;
@@ -47,11 +49,18 @@ import com.neztech.serah.utils.UserUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class MainMenuActivity extends Activity implements LocationListener {
     LinearLayout button;
     ImageView profileIcon;
 
     TextView userWelcomeText;
+    TextView currentLocationText;
     User currentLoggedInUserDetails;
     FirebaseAuth mAuth;
 
@@ -74,10 +83,20 @@ public class MainMenuActivity extends Activity implements LocationListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
+        //  API INSTANCE
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://maps.googleapis.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        GeocodeApi geocodeApi = retrofit.create(GeocodeApi.class);
+
+
         mAuth = FirebaseAuth.getInstance();
         profileIcon = findViewById(R.id.image_view_profile);
         userWelcomeText = findViewById(R.id.text_view_user_welcome);
         cardViewSpin = findViewById(R.id.card_view_serah);
+        currentLocationText = findViewById(R.id.text_view_mainmenu_currentlocation);
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -111,6 +130,36 @@ public class MainMenuActivity extends Activity implements LocationListener {
                             // Create a Snackbar with the latitude and longitude
                             String message = "Latitude: " + latitude + ", Longitude: " + longitude;
                             Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG).show();
+
+                            //  CALL API
+                            Call<GeocodeResponse> call = geocodeApi.getGeocode(latitude+","+longitude, "premise|street_address", "AIzaSyCo8H5XjCJbhNAlFoBVzaPI5MLrYOogAU0");
+                            call.enqueue(new Callback<GeocodeResponse>() {
+                                @Override
+                                public void onResponse(Call<GeocodeResponse> call, Response<GeocodeResponse> response) {
+                                    if (!response.isSuccessful()) {
+                                        // Handle the error
+                                        return;
+                                    }
+
+                                    GeocodeResponse geocodeResponse = response.body();
+                                    // Get the formatted address from the first result
+                                    String addressLocation = geocodeResponse.getResults().get(0).getFormattedAddress();
+
+                                    // Split the addressLocation string into an array of substrings
+                                    String[] addressParts = addressLocation.split(",");
+
+                                    // Get the first two parts of the address (before the second comma)
+                                    String shortAddress = addressParts[0] + "," + addressParts[1];
+
+                                    currentLocationText.setText(shortAddress);
+                                }
+
+                                @Override
+                                public void onFailure(Call<GeocodeResponse> call, Throwable t) {
+                                    // Handle the failure
+                                }
+                            });
+
                         }
                     });
         } else {
@@ -139,21 +188,21 @@ public class MainMenuActivity extends Activity implements LocationListener {
 
         //  Fetch current logged in user data
         UserUtils.fetchCurrentUserDetails(new OnUserFetched() {
-          @Override
-          public void onFetched(User user) {
-              // Handle the fetched user object
-              // For example, update UI elements
-              userWelcomeText.setText("What do you crave, " + user.getFull_name() + "?");
-              currentUser = user;
-              Log.d(TAG, "User data: " + user.toString());
-          }
+            @Override
+            public void onFetched(User user) {
+                // Handle the fetched user object
+                // For example, update UI elements
+                userWelcomeText.setText("What do you crave, " + user.getFull_name() + "?");
+                currentUser = user;
+                Log.d(TAG, "User data: " + user.toString());
+            }
 
-          @Override
-          public void onError(Exception e) {
-              // Handle the error here
-              Log.e(TAG, "Error fetching user details", e);
-          }
-      });
+            @Override
+            public void onError(Exception e) {
+                // Handle the error here
+                Log.e(TAG, "Error fetching user details", e);
+            }
+        });
 
 
         //  Image View
@@ -171,8 +220,8 @@ public class MainMenuActivity extends Activity implements LocationListener {
         cardViewSpin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Intent intent = new Intent(MainMenuActivity.this, WheelOfFoodActivity.class);
-               MainMenuActivity.this.startActivity(intent);
+                Intent intent = new Intent(MainMenuActivity.this, WheelOfFoodActivity.class);
+                MainMenuActivity.this.startActivity(intent);
             }
         });
     }

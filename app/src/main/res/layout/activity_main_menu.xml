@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.MainMenuActivity"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    tools:context=".activity.MainMenuActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,27 +15,40 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/_20ssp"
+            android:layout_margin="16dp"
             android:orientation="horizontal">
 
-            <com.google.android.material.appbar.AppBarLayout
-                android:id="@+id/searchTopBarLayout"
-                android:layout_width="350dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+            <LinearLayout
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:orientation="vertical">
 
-                <com.google.android.material.search.SearchBar
-                    android:id="@+id/searchTopBar"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:hint="Search" />
-            </com.google.android.material.appbar.AppBarLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/epilogue_bold"
+                    android:text="Your current location"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/text_view_mainmenu_currentlocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/epilogue_regular"
+                    android:text="Loading..."
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
 
             <ImageView
                 android:id="@+id/image_view_profile"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
                 android:layout_marginRight="20dp"
                 android:src="@drawable/profile_avatar" />
         </LinearLayout>
@@ -83,21 +96,21 @@
             <!-- Image Roulette Card Section To Be Inserted -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_view_serah"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="12dp"
                 android:layout_width="132dp"
                 android:layout_height="132dp"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
                 app:cardCornerRadius="20dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:fontFamily="@font/plusjakartasans_bold"
                     android:text="Serah deh"
-                    android:layout_gravity="center_horizontal"
                     android:textSize="12sp" />
-                
+
                 <ImageView
                     android:layout_width="80dp"
                     android:layout_height="80dp"
@@ -129,7 +142,7 @@
                     android:id="@+id/recycler_view_poppin_resto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_14ssp"/>
+                    android:layout_marginTop="@dimen/_14ssp" />
             </LinearLayout>
 
         </LinearLayout>
