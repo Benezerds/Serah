@@ -22,7 +22,9 @@ import com.neztech.serah.model.Restaurant;
 import com.neztech.serah.model.Review;
 import com.neztech.serah.utils.RestaurantUtils;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RestaurantReviewActivity extends AppCompatActivity {
     TextView title;
@@ -74,6 +76,9 @@ public class RestaurantReviewActivity extends AppCompatActivity {
                 restoReviewsRecycler.setAdapter(reviewAdapter);
                 LinearLayoutManager layoutManager = new LinearLayoutManager(RestaurantReviewActivity.this);
                 restoReviewsRecycler.setLayoutManager(layoutManager);
+
+                //  Set Content
+                setContent();
             }
         });
 
@@ -101,6 +106,81 @@ public class RestaurantReviewActivity extends AppCompatActivity {
     }
 
     public void setContent() {
+        // Left Side Content
+        rating.setText(getTotalRating());
+        ratingBar.setRating((float) getTotalRatingAsDouble());
+        totalReview.setText(String.valueOf(restoReviews.size()) + " reviews");
 
+        //  Rating bar
+        Map<Integer, Double> ratingPercentages = calculateRatingPercentages(restoReviews);
+
+        // Set progress for each rating's progress bar
+        progressBar1.setProgress((int) Math.round(ratingPercentages.getOrDefault(1, 0.0)));
+        progressBar2.setProgress((int) Math.round(ratingPercentages.getOrDefault(2, 0.0)));
+        progressBar3.setProgress((int) Math.round(ratingPercentages.getOrDefault(3, 0.0)));
+        progressBar4.setProgress((int) Math.round(ratingPercentages.getOrDefault(4, 0.0)));
+        progressBar5.setProgress((int) Math.round(ratingPercentages.getOrDefault(5, 0.0)));
+
+        // Set the text for percentage5 TextView
+        double percentageForRating5 = ratingPercentages.getOrDefault(5, 0.0);
+        percentage1.setText(formatPercentage(ratingPercentages.getOrDefault(1, 0.0)));
+        percentage2.setText(formatPercentage(ratingPercentages.getOrDefault(2, 0.0)));
+        percentage3.setText(formatPercentage(ratingPercentages.getOrDefault(3, 0.0)));
+        percentage4.setText(formatPercentage(ratingPercentages.getOrDefault(4, 0.0)));
+        percentage5.setText(formatPercentage(ratingPercentages.getOrDefault(5, 0.0)));
     }
+
+    public String getTotalRating() {
+        int totalRatingSum = 0;
+        int numberOfReviews = restoReviews.size();
+
+        for (Review review : restoReviews) {
+            totalRatingSum += review.getRating();
+        }
+
+        double averageRating = (double) totalRatingSum / numberOfReviews;
+
+        return String.valueOf(averageRating);
+    }
+
+    public double getTotalRatingAsDouble() {
+        int totalRatingSum = 0;
+        int numberOfReviews = restoReviews.size();
+
+        for (Review review : restoReviews) {
+            totalRatingSum += review.getRating();
+        }
+
+        return (double) totalRatingSum / numberOfReviews;
+    }
+
+    public Map<Integer, Double> calculateRatingPercentages(List<Review> reviews) {
+        Map<Integer, Integer> ratingCounts = new HashMap<>();
+        int totalReviews = reviews.size();
+
+        // Count occurrences of each rating
+        for (Review review : reviews) {
+            int rating = review.getRating();
+            ratingCounts.put(rating, ratingCounts.getOrDefault(rating, 0) + 1);
+        }
+
+        // Calculate percentages
+        Map<Integer, Double> ratingPercentages = new HashMap<>();
+        for (Map.Entry<Integer, Integer> entry : ratingCounts.entrySet()) {
+            int rating = entry.getKey();
+            int count = entry.getValue();
+            double percentage = (double) count / totalReviews * 100;
+            ratingPercentages.put(rating, percentage);
+        }
+
+        return ratingPercentages;
+    }
+
+    private String formatPercentage(double percentage) {
+        int roundedPercentage = (int) Math.round(percentage);
+        return roundedPercentage + "%";
+    }
+
+
+
 }
