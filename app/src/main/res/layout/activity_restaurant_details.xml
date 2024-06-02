@@ -88,7 +88,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/epilogue_black"
                                 android:gravity="top|center_horizontal"
-                                android:text="⭐ 4.8"
+                                android:text="⭐"
                                 android:textSize="@dimen/_20ssp" />
 
                             <TextView

@@ -21,7 +21,7 @@ import java.util.List;
 
 public class RestaurantDetailsActivity extends AppCompatActivity {
     TextView restoName;
-    TextView restoRating;
+//    TextView restoRating;
     TextView restoTables;
     TextView restoLocation;
     TextView description;
@@ -43,7 +43,7 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
         }
 
         restoName.setText(restaurant.getRestoName());
-        restoRating.setText("⭐ " + String.valueOf(restaurant.getRating()));
+//        restoRating.setText("⭐ " + String.valueOf(restaurant.getRating()));
         restoTables.setText(String.valueOf(restaurant.getTables()));
 
         // Assuming restaurant.getLocation() returns the entire template (e.g., "Seattle, 47.6062, -122.3321")
@@ -88,7 +88,7 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
 
     public void variableInitiation() {
         restoName = findViewById(R.id.text_view_restodetails_title);
-        restoRating = findViewById(R.id.text_view_restodetails_rating);
+//        restoRating = findViewById(R.id.text_view_restodetails_rating);
         restoTables = findViewById(R.id.text_view_restodetails_tables);
         restoLocation = findViewById(R.id.text_view_restodetails_location);
         description = findViewById(R.id.text_view_restodetails_description);
