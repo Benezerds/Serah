@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.neztech.serah.R;
 import com.neztech.serah.model.Reservation;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -32,7 +33,12 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
     @Override
     public void onBindViewHolder(@NonNull ReservationViewHolder holder, int position) {
         Reservation reservation = reservationList.get(position);
-        // TODO: Load image into holder.imageViewHistoryImage
+        //  Handle Image using picasso
+        Picasso.get()
+                .load(reservation.getRestaurant().getRestoImageUrl())
+                .placeholder(R.drawable.resto)
+                .error(R.drawable.splash)
+                .into(holder.imageViewHistoryImage);
         holder.textViewHistoryStatus.setText(reservation.getReservationStatus());
         holder.textViewReviewPax.setText(" - " + reservation.getPartySize() + " Pax");
         holder.textViewHistoryDate.setText(reservation.getReservationDate());
