@@ -184,7 +184,7 @@ public class MainMenuActivity extends Activity implements LocationListener {
                 MyRecyclerViewAdapter(this, imageResources);
         recyclerView.setAdapter(adapter);
 
-        getPoppingRestoData();
+
 
         //  Fetch current logged in user data
         UserUtils.fetchCurrentUserDetails(new OnUserFetched() {
@@ -224,6 +224,8 @@ public class MainMenuActivity extends Activity implements LocationListener {
                 MainMenuActivity.this.startActivity(intent);
             }
         });
+
+        getPoppingRestoData();
     }
 
 
@@ -237,7 +239,7 @@ public class MainMenuActivity extends Activity implements LocationListener {
         // Assume you have a method getFeaturedRestaurants that fetches the data asynchronously
         RestaurantUtils.getFeaturedRestaurants(fetchedRestaurants -> {
             // Create an instance of the adapter and pass the fetched data to it
-            PoppingRestoRecyclerViewAdapter adapter = new PoppingRestoRecyclerViewAdapter(this, fetchedRestaurants);
+            PoppingRestoRecyclerViewAdapter adapter = new PoppingRestoRecyclerViewAdapter(this, fetchedRestaurants, currentUser);
 
             // Set the adapter to the RecyclerView
             poppingRecyclerView.setAdapter(adapter);
