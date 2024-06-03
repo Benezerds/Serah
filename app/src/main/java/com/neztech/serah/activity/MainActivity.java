@@ -23,15 +23,12 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FirebaseApp.initializeApp(this);
 
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-
+        finishActivity(10);
         String apiKey = "AIzaSyCo8H5XjCJbhNAlFoBVzaPI5MLrYOogAU0";
 
         // Initialize the SDK
@@ -39,9 +36,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Create a new PlacesClient instance
         PlacesClient placesClient = Places.createClient(this);
-
-
-
 
         mAuth = FirebaseAuth.getInstance();
         // Check if the user is logged in

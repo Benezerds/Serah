@@ -22,7 +22,7 @@ public class SplashScreenActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,10);
                 finish();
             }
         }, 1000);
