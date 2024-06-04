@@ -5,7 +5,6 @@ import static androidx.fragment.app.FragmentManager.TAG;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
@@ -109,7 +108,7 @@ public class RestaurantReviewActivity extends AppCompatActivity {
 
     public void setContent() {
         // Left Side Content
-        rating.setText(getTotalRating());
+        rating.setText(getTotalAverageRating());
         ratingBar.setRating((float) getTotalRatingAsDouble());
         totalReview.setText(String.valueOf(restoReviews.size()) + " reviews");
 
@@ -132,7 +131,7 @@ public class RestaurantReviewActivity extends AppCompatActivity {
         percentage5.setText(formatPercentage(ratingPercentages.getOrDefault(5, 0.0)));
     }
 
-    public String getTotalRating() {
+    public String getTotalAverageRating() {
         int totalRatingSum = 0;
         int numberOfReviews = restoReviews.size();
 

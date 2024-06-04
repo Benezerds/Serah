@@ -1,9 +1,13 @@
 package com.neztech.serah.restaurant;
 
+import static androidx.fragment.app.FragmentManager.TAG;
+
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -11,8 +15,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.neztech.serah.R;
+import com.neztech.serah.adapter.RestoReviewAdapter;
 import com.neztech.serah.model.Restaurant;
 import com.neztech.serah.model.Review;
 import com.neztech.serah.utils.RestaurantUtils;
@@ -22,17 +28,20 @@ import java.util.List;
 
 public class RestaurantDetailsActivity extends AppCompatActivity {
     TextView restoName;
-//    TextView restoRating;
+    TextView restoRating;
     TextView restoTables;
     TextView restoLocation;
     TextView description;
     ImageView restoImage;
+    String averageRating;
 
     Restaurant restaurant;
     Button reservationButton;
     CardView cardViewRating;
     CardView restoLocationCardView;
 
+    //  List of Reviews to get the rating
+    List<Review> reviewList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,9 +53,22 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
             restaurant = (Restaurant) getIntent().getSerializableExtra("selectedRestaurant");
         }
 
+        RestaurantUtils.getAllReviewsByReference(restaurant.getDocumentReference(), restaurant, new RestaurantUtils.ReviewsCallback() {
+            @SuppressLint("RestrictedApi")
+            @Override
+            public void onReviewsLoaded(List<Review> reviews) {
+                reviewList = reviews;
+                averageRating = getTotalAverageRating();
+                restoRating.setText("⭐ " + averageRating);
+            }
+        });
+
+
+
         restoName.setText(restaurant.getRestoName());
-//        restoRating.setText("⭐ " + String.valueOf(restaurant.getRating()));
+
         restoTables.setText(String.valueOf(restaurant.getTables()));
+
 
         // Assuming restaurant.getLocation() returns the entire template (e.g., "Seattle, 47.6062, -122.3321")
         String locationTemplate = restaurant.getLocation();
@@ -97,15 +119,12 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
-
     }
 
 
     public void variableInitiation() {
         restoName = findViewById(R.id.text_view_restodetails_title);
-//        restoRating = findViewById(R.id.text_view_restodetails_rating);
+        restoRating = findViewById(R.id.text_view_restodetails_rating);
         restoTables = findViewById(R.id.text_view_restodetails_tables);
         restoLocation = findViewById(R.id.text_view_restodetails_location);
         description = findViewById(R.id.text_view_restodetails_description);
@@ -116,6 +135,19 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
         //  Card View & Button
         cardViewRating = findViewById(R.id.card_view_rating);
         reservationButton = findViewById(R.id.button_restaurantdetails_reservation);
+    }
+
+    public String getTotalAverageRating() {
+        int totalRatingSum = 0;
+        int numberOfReviews = reviewList.size();
+
+        for (Review review : reviewList) {
+            totalRatingSum += review.getRating();
+        }
+
+        double averageRating = (double) totalRatingSum / numberOfReviews;
+
+        return String.format("%.1f", averageRating);
     }
 
 }
