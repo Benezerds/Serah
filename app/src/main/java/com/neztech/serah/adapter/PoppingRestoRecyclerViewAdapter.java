@@ -62,7 +62,6 @@ public class PoppingRestoRecyclerViewAdapter extends RecyclerView.Adapter<Poppin
 
         holder.restoName.setText(restaurant.getRestoName());
         holder.description.setText(restaurant.getDescription());
-        holder.rating.setText(String.valueOf(restaurant.getRating()));
 
         // Handle Image using picasso
         Picasso.get()
@@ -92,7 +91,6 @@ public class PoppingRestoRecyclerViewAdapter extends RecyclerView.Adapter<Poppin
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView restoName;
         TextView description;
-        TextView rating;
         ImageView restoImage;
         TextView distance;
 
@@ -100,7 +98,6 @@ public class PoppingRestoRecyclerViewAdapter extends RecyclerView.Adapter<Poppin
             super(itemView);
             restoName = itemView.findViewById(R.id.text_view_restoname);
             description = itemView.findViewById(R.id.text_view_resto_location_details);
-            rating = itemView.findViewById(R.id.text_view_popping_rating);
             restoImage = itemView.findViewById(R.id.image_view_resto_popping);
             distance = itemView.findViewById(R.id.text_view_popping_distance);
         }

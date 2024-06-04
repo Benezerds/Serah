@@ -50,8 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/text_view_restoname"
-            android:layout_toEndOf="@id/card_view_recipes_icon_container"
-            android:text="Location: " />
+            android:layout_toEndOf="@id/card_view_recipes_icon_container" />
 
 
         <TextView
@@ -62,31 +61,20 @@
             android:layout_toEndOf="@id/text_view_location"
             android:text="Fx Sudirman Mall" />
 
-
         <TextView
-            android:id="@+id/text_view_popping_rating"
+            android:id="@+id/text_view_location_texts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/text_view_location"
             android:layout_toEndOf="@id/card_view_recipes_icon_container"
-            android:text="4.8" />
-
-        <TextView
-            android:id="@+id/text_view_sepparator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:layout_below="@+id/text_view_location"
-            android:layout_toEndOf="@id/text_view_popping_rating"
-            android:text="-" />
+            android:text="Distance: " />
 
         <TextView
             android:id="@+id/text_view_popping_distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/text_view_location"
-            android:layout_toEndOf="@id/text_view_sepparator"
+            android:layout_toEndOf="@id/text_view_location_texts"
             android:text="900 m" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
