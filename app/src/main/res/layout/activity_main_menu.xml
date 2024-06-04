@@ -1,8 +1,8 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:fitsSystemWindows="true"
     tools:context=".activity.MainMenuActivity">
 
@@ -142,11 +142,12 @@
                     android:id="@+id/recycler_view_poppin_resto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_14ssp" />
+                    android:layout_marginTop="@dimen/_14ssp"
+                    android:nestedScrollingEnabled="false"/>
             </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
 
-</ScrollView>
+</androidx.core.widget.NestedScrollView>
