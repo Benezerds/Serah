@@ -59,6 +59,8 @@ public class RestaurantReviewActivity extends AppCompatActivity {
 
         if (getIntent().getExtras() != null) {
             restaurant = (Restaurant) getIntent().getSerializableExtra("restodata");
+            //  Resto Name
+            title.setText(restaurant.getRestoName());
         }
 
 
